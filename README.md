@@ -35,6 +35,7 @@ Would run the fastest implementation of ClosestPointPair on test case 10.
 | DeterministicOrderSelection | ✓            | ✓          | ✓                       |             |         | ✓       | ✓          |
 | HuffmanEncoding             |              | ✓          | missing answer          |             |         | ✓       | ✓          |
 | KnapsackProblem             |              | ✓          |                         |             |         | ✓       | ✓          |
+| MatrixChainMultiplication   |              |            |                         |             |         | ✓       | ✓          |
 | MaxContiguousSubsequence    | ✓            | ✓          | ✓                       | ✓           | ✓       | ✓       | ✓          |
 | MinimumSpanningTrees        |              | ✓          | ✓                       |             |         | ✓       | ✓          |
 | StrassenAlgorithm           |              | ✓          |                         | ✓           | ✓       | ✓       | N/A        |

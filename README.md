@@ -18,7 +18,6 @@ python3 main.py [OPTIONS]
 | -tc, --test-case       | 1 - 11                                  | Specify the test case to run, will do all by default. Not all algorithms will have 11 test cases.                 |
 | -m, --method           | `brute_force` \| `fastest` \| `[other]` | Which method to run, using `brute_force` may take a while depending on the problem, will do `fastest` by default. |
 | -la, --list-algorithms | N/A                                     | Lists the available algorithms you can run.                                                                       |
-| -lc, --list-test-cases | algorithm name                          | Lists the available test cases for the given algorithm.                                                           |
 | -lm, --list-methods    | algorithm name                          | Lists the available methods that the given algorithm has implemented.                                             |
 
 So for example:
@@ -29,13 +28,13 @@ Would run the fastest implementation of ClosestPointPair on test case 10.
 
 ### Todo
 
-| Algorithm                   | Instructions | Test Cases            | Example (Case & Answer) | Brute Force | Fastest | Answers | Other Code |
-|:----------------------------|:-------------|:----------------------|:------------------------|:------------|:--------|:--------|:-----------|
-| AllPairsShortestPath        |              | ✓                     |                         |             |         | ✓       | ✓          |
-| ClosestPointPair            | ✓            | ✓                     | ✓                       | ✓           | ✓       | ✓       | N/A        |
-| DeterministicOrderSelection | ✓            | ✓                     | ✓                       |             |         | ✓       | ✓          |
-| FastFourierTransform        | ✓            | missing 7             | ✓                       |             |         |         |            |
-| HuffmanEncoding             |              | ✓                     | missing answer          |             |         | ✓       | ✓          |
-| KnapsackProblem             |              | ✓                     |                         |             |         | ✓       | ✓          |
-| MinimumSpanningTrees        |              | ✓                     | ✓                       |             |         | ✓       | ✓          |
-| StrassenAlgorithm           |              | missing 2, 7, 9, & 10 |                         | ✓           | ✓       | ✓       | N/A        |
+| Algorithm                   | Instructions | Test Cases | Example (Case & Answer) | Brute Force | Fastest | Answers | Other Code |
+|:----------------------------|:-------------|:-----------|:------------------------|:------------|:--------|:--------|:-----------|
+| AllPairsShortestPath        |              | ✓          |                         |             |         | ✓       | ✓          |
+| ClosestPointPair            | ✓            | ✓          | ✓                       | ✓           | ✓       | ✓       | N/A        |
+| DeterministicOrderSelection | ✓            | ✓          | ✓                       |             |         | ✓       | ✓          |
+| HuffmanEncoding             |              | ✓          | missing answer          |             |         | ✓       | ✓          |
+| KnapsackProblem             |              | ✓          |                         |             |         | ✓       | ✓          |
+| MaxContiguousSubsequence    | ✓            | ✓          | ✓                       | ✓           | ✓       | ✓       | ✓          |
+| MinimumSpanningTrees        |              | ✓          | ✓                       |             |         | ✓       | ✓          |
+| StrassenAlgorithm           |              | ✓          |                         | ✓           | ✓       | ✓       | N/A        |

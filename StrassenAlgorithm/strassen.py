@@ -31,9 +31,7 @@ def run_strassen(matrix_a, matrix_b):
     return np.array([c11[i] + c12[i] for i in range(len(c11))] + [c21[i] + c22[i] for i in range(len(c21))])
 
 
-def strassen(file_a, file_b):
-    file_a_path = './StrassenAlgorithm/tests/' + file_a
-    file_b_path = './StrassenAlgorithm/tests/' + file_b
+def strassen(file_a_path, file_b_path):
     matrix_a = np.array([[int(i) for i in a.split(', ')] for a in open(file_a_path).read()[2:-2].split('}, {')])
     matrix_b = np.array([[int(i) for i in a.split(', ')] for a in open(file_b_path).read()[2:-2].split('}, {')])
 

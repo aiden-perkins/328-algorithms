@@ -1,9 +1,7 @@
 import numpy as np
 
 
-def brute_force(file_a, file_b):
-    file_a_path = './StrassenAlgorithm/tests/' + file_a
-    file_b_path = './StrassenAlgorithm/tests/' + file_b
+def brute_force(file_a_path, file_b_path):
     matrix_a = np.array([[int(i) for i in a.split(', ')] for a in open(file_a_path).read()[2:-2].split('}, {')])
     matrix_b = np.array([[int(i) for i in a.split(', ')] for a in open(file_b_path).read()[2:-2].split('}, {')])
     padding = int(2 ** np.ceil(np.log2(len(matrix_a))) - len(matrix_a))

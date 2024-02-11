@@ -20,8 +20,9 @@ def display_results(results):
 
 if __name__ == '__main__':
     raw_algorithms = {
-        'ClosestPointPair': ('divide_and_conquer', True),
-        'StrassenAlgorithm': ('strassen', False),
+        'ClosestPointPair': ('divide_and_conquer', True, True),
+        'StrassenAlgorithm': ('strassen', False, False),
+        'MaxContiguousSubsequence': ('kadane', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:
@@ -38,7 +39,7 @@ if __name__ == '__main__':
         '--test-case',
         help='Specify the test case to run, will do all by default',
         type=int,
-        choices=range(1, 12)
+        choices=range(11)
     )
     parser.add_argument(
         '-m',
@@ -52,12 +53,6 @@ if __name__ == '__main__':
         action='store_true'
     )
     parser.add_argument(
-        '-lc',
-        '--list-test-cases',
-        help='Lists the available test cases for the given algorithm',
-        choices=raw_algorithms
-    )
-    parser.add_argument(
         '-lm',
         '--list-methods',
         help='Lists the available methods that the given algorithm has implemented',
@@ -67,17 +62,14 @@ if __name__ == '__main__':
     if args.list_algorithms:
         for algorithm in raw_algorithms:
             print(algorithm)
-    if args.list_test_cases:
-        test_cases = algorithms[args.list_test_cases].tests
-        for test_num in range(1, len(test_cases) + 1):
-            print(f'{test_num}. {" - ".join(test_cases[test_num - 1])}')
     if args.list_methods:
         [print(a) for a in algorithms[args.list_methods].algorithm_methods]
     if args.algorithm:
         algo = algorithms[args.algorithm]
         tests_to_run = [args.test_case]
-        if not args.test_case:
-            tests_to_run = list(range(1, len(algo.tests) + 1))
+        start = 0 if algo.has_example else 1
+        if args.test_case is None:
+            tests_to_run = list(range(start, 11))
         for test_case in tests_to_run:
             ans, total_time, test_num = algo.run_algorithm(args.method, test_case)
             print(f'{test_num}. {ans:<.3f} | took {total_time:<.4f} seconds.')

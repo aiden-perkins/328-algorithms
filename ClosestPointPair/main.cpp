@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     double ans;
     if (argc > 1) {
         string arg = argv[1];
-        string fileName = "./ClosestPointPair/" + arg + ".txt";
+        string fileName = "./ClosestPointPair/tests/" + arg + ".txt";
         vector<pair<double, double>> input = parse_input(fileName);
         sort(input.begin(), input.end());
         if (argc > 2) {
@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
         cout << ans << endl;
     } else {
         for (int i = 0; i <= 10; i++) {
-            string fileName = "./ClosestPointPair/" + to_string(i) + ".txt";
+            string fileName = "./ClosestPointPair/tests/" + to_string(i) + ".txt";
             vector<pair<double, double>> input = parse_input(fileName);
             sort(input.begin(), input.end());
             ans = round(divideAndConquer(input) * 1000) / 1000;

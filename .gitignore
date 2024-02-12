@@ -3,3 +3,5 @@ __pycache__
 *.exe
 *.out
 main
+cmake-build-debug
+cmake-build-debug-mingw

@@ -1,15 +1,15 @@
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include <cmath>
+#include "ClosestPointPair.h"
 using namespace std;
 
-vector<pair<double, double>> parse_input(const string& file_name) {
+vector<pair<double, double>> ClosestPointPair::parseInput(const string& filePath) {
     vector<pair<double, double>> points;
-    ifstream file(file_name);
+    ifstream file(filePath);
     string input;
     if (file.is_open()) {
         while (getline(file, input, '}')) {
@@ -34,29 +34,15 @@ vector<pair<double, double>> parse_input(const string& file_name) {
     return points;
 }
 
-double brute_force(const vector<pair<double, double>>& points) {
-    double bruteForceMin = 100;
-    for (int i = 0; i < points.size(); i++) {
-        for (int j = i + 1; j < points.size(); j++) {
-            double distance = sqrt(
-                pow(points[i].first - points[j].first, 2) +
-                pow(points[i].second - points[j].second, 2)
-            );
-            if (bruteForceMin > distance) {
-                bruteForceMin = distance;
-            }
-        }
-    }
-    return bruteForceMin;
-}
-
-bool sortSecond(const std::pair<double, double> &a, const std::pair<double, double> &b) {
+bool ClosestPointPair::sortSecond(const std::pair<double, double> &a, const std::pair<double, double> &b) {
     return a.second < b.second;
 }
 
-double divideAndConquer(const vector<pair<double, double>>& points) {
+double ClosestPointPair::splitAndSolve(vector<pair<double, double>> points) {
     if (points.size() < 10) {
-        double bruteForceMin = 100;
+        double bruteForceMin = sqrt(
+            pow(points[0].first - points[1].first, 2) + pow(points[0].second - points[1].second, 2)
+        );
         for (int i = 0; i < points.size(); i++) {
             for (int j = i + 1; j < points.size(); j++) {
                 double distance = sqrt(
@@ -73,7 +59,7 @@ double divideAndConquer(const vector<pair<double, double>>& points) {
     int middleIndex = floor(points.size() / 2);
     vector<pair<double, double>> leftPoints(points.begin(), points.begin() + middleIndex);
     vector<pair<double, double>> rightPoints(points.begin() + middleIndex, points.end());
-    double newMin = min(divideAndConquer(leftPoints), divideAndConquer(rightPoints));
+    double newMin = min(splitAndSolve(leftPoints), splitAndSolve(rightPoints));
     int leftIndex = middleIndex;
     double leftMin = points[middleIndex].first - newMin;
     while (points[leftIndex].first >= leftMin && leftIndex > 0) {
@@ -102,27 +88,28 @@ double divideAndConquer(const vector<pair<double, double>>& points) {
     return newMin;
 }
 
-int main(int argc, char *argv[]) {
-    double ans;
-    if (argc > 1) {
-        string arg = argv[1];
-        string fileName = "./ClosestPointPair/tests/" + arg + ".txt";
-        vector<pair<double, double>> input = parse_input(fileName);
-        sort(input.begin(), input.end());
-        if (argc > 2) {
-            ans = round(brute_force(input) * 1000) / 1000;
-        } else {
-            ans = round(divideAndConquer(input) * 1000) / 1000;
-        }
-        cout << ans << endl;
-    } else {
-        for (int i = 0; i <= 10; i++) {
-            string fileName = "./ClosestPointPair/tests/" + to_string(i) + ".txt";
-            vector<pair<double, double>> input = parse_input(fileName);
-            sort(input.begin(), input.end());
-            ans = round(divideAndConquer(input) * 1000) / 1000;
-            cout << to_string(i) << ". " << ans << endl;
+double ClosestPointPair::divideAndConquer(const string& filePath) {
+    vector<pair<double, double>> points = parseInput(filePath);
+    sort(points.begin(), points.end());
+    return splitAndSolve(points);
+}
+
+double ClosestPointPair::bruteForce(const string& filePath) {
+    vector<pair<double, double>> points = parseInput(filePath);
+    sort(points.begin(), points.end());
+    double bruteForceMin = sqrt(
+        pow(points[0].first - points[1].first, 2) + pow(points[0].second - points[1].second, 2)
+    );
+    for (int i = 0; i < points.size(); i++) {
+        for (int j = i + 1; j < points.size(); j++) {
+            double distance = sqrt(
+                pow(points[i].first - points[j].first, 2) +
+                pow(points[i].second - points[j].second, 2)
+            );
+            if (bruteForceMin > distance) {
+                bruteForceMin = distance;
+            }
         }
     }
-    return 0;
+    return bruteForceMin;
 }

@@ -38,4 +38,4 @@ Would run the fastest implementation of ClosestPointPair on test case 10.
 | MatrixChainMultiplication   |              |            |                         |             |         | ✓       | ✓          |
 | MaxContiguousSubsequence    | ✓            | ✓          | ✓                       | ✓           | ✓       | ✓       | ✓          |
 | MinimumSpanningTrees        |              | ✓          | ✓                       |             |         | ✓       | ✓          |
-| StrassenAlgorithm           |              | ✓          |                         | ✓           | ✓       | ✓       | N/A        |
+| StrassenAlgorithm           | ✓            | ✓          | ✓                       | ✓           | ✓       | ✓       | N/A        |

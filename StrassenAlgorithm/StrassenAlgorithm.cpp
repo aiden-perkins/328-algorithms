@@ -82,8 +82,8 @@ vector<vector<int>> StrassenAlgorithm::combineMatrix(vector<vector<int>> m1, vec
             row.insert(row.end(), m1[i].begin(), m1[i].end());
             row.insert(row.end(), m2[i].begin(), m2[i].end());
         } else {
-            row.insert(row.end(), m3[i].begin(), m3[i].end());
-            row.insert(row.end(), m4[i].begin(), m4[i].end());
+            row.insert(row.end(), m3[i - m1.size()].begin(), m3[i - m1.size()].end());
+            row.insert(row.end(), m4[i - m1.size()].begin(), m4[i - m1.size()].end());
         }
         result.push_back(row);
     }
@@ -91,7 +91,7 @@ vector<vector<int>> StrassenAlgorithm::combineMatrix(vector<vector<int>> m1, vec
 }
 
 vector<vector<int>> StrassenAlgorithm::runStrassen(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    if (matrixA.size() < 64) {
+    if (matrixA.size() <= 64) {
         vector<vector<int>> bruteForceMatrix(matrixA.size(), vector<int>(matrixA.size(), 0));
         for (int i = 0; i < matrixA.size(); i++) {
             for (int j = 0; j < matrixA.size(); j++) {
@@ -132,7 +132,7 @@ double StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBP
 }
 
 vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    if (matrixA.size() < 64) {
+    if (matrixA.size() <= 64) {
         vector<vector<int>> bruteForceMatrix(matrixA.size(), vector<int>(matrixA.size(), 0));
         for (int i = 0; i < matrixA.size(); i++) {
             for (int j = 0; j < matrixA.size(); j++) {
@@ -146,8 +146,8 @@ vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA
     vector<vector<vector<int>>> dividedMatrixA = divideMatrix(matrixA);
     vector<vector<vector<int>>> dividedMatrixB = divideMatrix(matrixB);
     vector<vector<int>> c11 = addMatrix(splitAndSolve(dividedMatrixA[0], dividedMatrixB[0]), splitAndSolve(dividedMatrixA[1], dividedMatrixB[2]));
-    vector<vector<int>> c12 = addMatrix(splitAndSolve(dividedMatrixA[0], dividedMatrixB[1]), splitAndSolve(dividedMatrixA[3], dividedMatrixB[3]));
-    vector<vector<int>> c21 = addMatrix(splitAndSolve(dividedMatrixA[2], dividedMatrixB[0]), splitAndSolve(dividedMatrixA[1], dividedMatrixB[2]));
+    vector<vector<int>> c12 = addMatrix(splitAndSolve(dividedMatrixA[0], dividedMatrixB[1]), splitAndSolve(dividedMatrixA[1], dividedMatrixB[3]));
+    vector<vector<int>> c21 = addMatrix(splitAndSolve(dividedMatrixA[2], dividedMatrixB[0]), splitAndSolve(dividedMatrixA[3], dividedMatrixB[2]));
     vector<vector<int>> c22 = addMatrix(splitAndSolve(dividedMatrixA[2], dividedMatrixB[1]), splitAndSolve(dividedMatrixA[3], dividedMatrixB[3]));
     return combineMatrix(c11, c12, c21, c22);
 }

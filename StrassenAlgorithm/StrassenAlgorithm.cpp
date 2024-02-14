@@ -32,98 +32,79 @@ vector<vector<int>> StrassenAlgorithm::parseInput(const string& filePath) {
     return matrix;
 }
 
-vector<vector<int>> StrassenAlgorithm::subtractMatrix(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    vector<vector<int>> result;
-    for (int i = 0; i < matrixA.size(); i++) {
-        vector<int> newRow;
-        for (int j = 0; j < matrixA.size(); j++) {
-            newRow.push_back(matrixA[i][j] - matrixB[i][j]);
+vector<vector<int>> StrassenAlgorithm::mergeMatrix(vector<vector<int>> matrixA, vector<vector<int>> matrixB, int matrixSize, int multiplier) {
+    vector<int> rowVector(matrixSize, 0);
+    vector<vector<int> > result(matrixSize, rowVector);
+    for (int i = 0; i < matrixSize; i++) {
+        for (int j = 0; j < matrixSize; j++) {
+            result[i][j] += matrixA[i][j] + (multiplier * matrixB[i][j]);
         }
-        result.push_back(newRow);
     }
     return result;
 }
 
-vector<vector<int>> StrassenAlgorithm::addMatrix(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    vector<vector<int>> result;
-    for (int i = 0; i < matrixA.size(); i++) {
-        vector<int> newRow;
-        for (int j = 0; j < matrixA.size(); j++) {
-            newRow.push_back(matrixA[i][j] + matrixB[i][j]);
-        }
-        result.push_back(newRow);
-    }
-    return result;
-}
-
-vector<vector<vector<int>>> StrassenAlgorithm::divideMatrix(vector<vector<int>> matrix) {
-    int middle = static_cast<int>(matrix.size() / 2);
-    vector<vector<vector<int>>> quadrants(4);
-    for (int i = 0; i < matrix.size(); i++) {
-        vector<int> leftHalf(matrix[i].begin(), matrix[i].begin() + middle);
-        vector<int> rightHalf(matrix[i].begin() + middle, matrix[i].end());
-        if (i < middle) {
-            quadrants[0].push_back(leftHalf);
-            quadrants[1].push_back(rightHalf);
-        } else {
-            quadrants[2].push_back(leftHalf);
-            quadrants[3].push_back(rightHalf);
-        }
-    }
-    return quadrants;
-}
-
-vector<vector<int>> StrassenAlgorithm::combineMatrix(vector<vector<int>> m1, vector<vector<int>> m2, vector<vector<int>> m3, vector<vector<int>> m4) {
-    vector<vector<int>> result;
-    int middle = static_cast<int>(m1.size());
-    for (int i = 0; i < 2 * m1.size(); i++) {
-        vector<int> row;
-        if (i < middle) {
-            row.insert(row.end(), m1[i].begin(), m1[i].end());
-            row.insert(row.end(), m2[i].begin(), m2[i].end());
-        } else {
-            row.insert(row.end(), m3[i - m1.size()].begin(), m3[i - m1.size()].end());
-            row.insert(row.end(), m4[i - m1.size()].begin(), m4[i - m1.size()].end());
-        }
-        result.push_back(row);
-    }
-    return result;
-}
-
-vector<vector<int>> StrassenAlgorithm::runStrassen(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    if (matrixA.size() <= 64) {
-        vector<vector<int>> bruteForceMatrix(matrixA.size(), vector<int>(matrixA.size(), 0));
-        for (int i = 0; i < matrixA.size(); i++) {
-            for (int j = 0; j < matrixA.size(); j++) {
-                for (int k = 0; k < matrixA.size(); k++) {
+vector<vector<int>> StrassenAlgorithm::runStrassen(vector<vector<int>> matrixA, vector<vector<int>> matrixB, int matrixSize) {
+    if (matrixSize <= 64) {
+        vector<vector<int>> bruteForceMatrix(matrixSize, vector<int>(matrixSize, 0));
+        for (int i = 0; i < matrixSize; i++) {
+            for (int j = 0; j < matrixSize; j++) {
+                for (int k = 0; k < matrixSize; k++) {
                     bruteForceMatrix[i][j] += matrixA[i][k] * matrixB[k][j];
                 }
             }
         }
         return bruteForceMatrix;
     }
-    vector<vector<vector<int>>> dividedMatrixA = divideMatrix(matrixA);
-    vector<vector<vector<int>>> dividedMatrixB = divideMatrix(matrixB);
-    vector<vector<int>> p1 = runStrassen(dividedMatrixA[0], subtractMatrix(dividedMatrixB[1], dividedMatrixB[3]));
-    vector<vector<int>> p2 = runStrassen(addMatrix(dividedMatrixA[0], dividedMatrixA[1]), dividedMatrixB[3]);
-    vector<vector<int>> p3 = runStrassen(addMatrix(dividedMatrixA[2], dividedMatrixA[3]), dividedMatrixB[0]);
-    vector<vector<int>> p4 = runStrassen(dividedMatrixA[3], subtractMatrix(dividedMatrixB[2], dividedMatrixB[0]));
-    vector<vector<int>> p5 = runStrassen(addMatrix(dividedMatrixA[0], dividedMatrixA[3]), addMatrix(dividedMatrixB[0], dividedMatrixB[3]));
-    vector<vector<int>> p6 = runStrassen(subtractMatrix(dividedMatrixA[1], dividedMatrixA[3]), addMatrix(dividedMatrixB[2], dividedMatrixB[3]));
-    vector<vector<int>> p7 = runStrassen(subtractMatrix(dividedMatrixA[0], dividedMatrixA[2]), addMatrix(dividedMatrixB[0], dividedMatrixB[1]));
-    vector<vector<int>> c11 = addMatrix(subtractMatrix(addMatrix(p5, p4), p2), p6);
-    vector<vector<int>> c12 = addMatrix(p1, p2);
-    vector<vector<int>> c21 = addMatrix(p3, p4);
-    vector<vector<int>> c22 = subtractMatrix(subtractMatrix(addMatrix(p1, p5), p3), p7);
-    return combineMatrix(c11, c12, c21, c22);
+    int newMatrixSize = matrixSize / 2;
+    vector<int> rowVector(matrixSize, 0);
+    vector<vector<int>> a11(matrixSize, rowVector);
+    vector<vector<int>> a12(matrixSize, rowVector);
+    vector<vector<int>> a21(matrixSize, rowVector);
+    vector<vector<int>> a22(matrixSize, rowVector);
+    vector<vector<int>> b11(matrixSize, rowVector);
+    vector<vector<int>> b12(matrixSize, rowVector);
+    vector<vector<int>> b21(matrixSize, rowVector);
+    vector<vector<int>> b22(matrixSize, rowVector);
+    for (int i = 0; i < newMatrixSize; i++) {
+        for (int j = 0; j < newMatrixSize; j++) {
+            a11[i][j] = matrixA[i][j];
+            a12[i][j] = matrixA[i][j + newMatrixSize];
+            a21[i][j] = matrixA[newMatrixSize + i][j];
+            a22[i][j] = matrixA[i + newMatrixSize][j + newMatrixSize];
+            b11[i][j] = matrixB[i][j];
+            b12[i][j] = matrixB[i][j + newMatrixSize];
+            b21[i][j] = matrixB[newMatrixSize + i][j];
+            b22[i][j] = matrixB[i + newMatrixSize][j + newMatrixSize];
+        }
+    }
+    vector<vector<int>> p1 = runStrassen(a11, mergeMatrix(b12, b22, newMatrixSize, -1), newMatrixSize);
+    vector<vector<int>> p2 = runStrassen(mergeMatrix(a11, a12, newMatrixSize, 1), b22, newMatrixSize);
+    vector<vector<int>> p3 = runStrassen(mergeMatrix(a21, a22, newMatrixSize, 1), b11, newMatrixSize);
+    vector<vector<int>> p4 = runStrassen(a22, mergeMatrix(b21, b11, newMatrixSize, -1), newMatrixSize);
+    vector<vector<int>> p5 = runStrassen(mergeMatrix(a11, a22, newMatrixSize, 1), mergeMatrix(b11, b22, newMatrixSize, 1), newMatrixSize);
+    vector<vector<int>> p6 = runStrassen(mergeMatrix(a12, a22, newMatrixSize, -1), mergeMatrix(b21, b22, newMatrixSize, 1), newMatrixSize);
+    vector<vector<int>> p7 = runStrassen(mergeMatrix(a11, a21, newMatrixSize, -1), mergeMatrix(b11, b12, newMatrixSize, 1), newMatrixSize);
+    vector<vector<int>> c11 = mergeMatrix(mergeMatrix(mergeMatrix(p5, p4, newMatrixSize, 1), p2, newMatrixSize, -1), p6, newMatrixSize, 1);
+    vector<vector<int>> c12 = mergeMatrix(p1, p2, newMatrixSize, 1);
+    vector<vector<int>> c21 = mergeMatrix(p3, p4, newMatrixSize, 1);
+    vector<vector<int>> c22 = mergeMatrix(mergeMatrix(mergeMatrix(p1, p5, newMatrixSize, 1), p3, newMatrixSize, -1), p7, newMatrixSize, -1);
+    vector<vector<int> > result(matrixSize, vector<int>(matrixSize, 0));
+    for (int i = 0; i < newMatrixSize; i++) {
+        for (int j = 0; j < newMatrixSize; j++) {
+            result[i][j] = c11[i][j];
+            result[i][j + newMatrixSize] = c12[i][j];
+            result[newMatrixSize + i][j] = c21[i][j];
+            result[i + newMatrixSize][j + newMatrixSize] = c22[i][j];
+        }
+    }
+    return result;
 }
 
 double StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
-    vector<vector<int>> result = runStrassen(matrixA, matrixB);
-    double sum = 0;
-    for (const vector<int> &row: result) {
+    int sum = 0;
+    for (const vector<int> &row: runStrassen(matrixA, matrixB, static_cast<int>(matrixA.size()))) {
         for (int v: row) {
             sum += v;
         }
@@ -131,33 +112,61 @@ double StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBP
     return sum;
 }
 
-vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA, vector<vector<int>> matrixB) {
-    if (matrixA.size() <= 64) {
-        vector<vector<int>> bruteForceMatrix(matrixA.size(), vector<int>(matrixA.size(), 0));
-        for (int i = 0; i < matrixA.size(); i++) {
-            for (int j = 0; j < matrixA.size(); j++) {
-                for (int k = 0; k < matrixA.size(); k++) {
+vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA, vector<vector<int>> matrixB, int matrixSize) {
+    if (matrixSize <= 64) {
+        vector<vector<int>> bruteForceMatrix(matrixSize, vector<int>(matrixSize, 0));
+        for (int i = 0; i < matrixSize; i++) {
+            for (int j = 0; j < matrixSize; j++) {
+                for (int k = 0; k < matrixSize; k++) {
                     bruteForceMatrix[i][j] += matrixA[i][k] * matrixB[k][j];
                 }
             }
         }
         return bruteForceMatrix;
     }
-    vector<vector<vector<int>>> dividedMatrixA = divideMatrix(matrixA);
-    vector<vector<vector<int>>> dividedMatrixB = divideMatrix(matrixB);
-    vector<vector<int>> c11 = addMatrix(splitAndSolve(dividedMatrixA[0], dividedMatrixB[0]), splitAndSolve(dividedMatrixA[1], dividedMatrixB[2]));
-    vector<vector<int>> c12 = addMatrix(splitAndSolve(dividedMatrixA[0], dividedMatrixB[1]), splitAndSolve(dividedMatrixA[1], dividedMatrixB[3]));
-    vector<vector<int>> c21 = addMatrix(splitAndSolve(dividedMatrixA[2], dividedMatrixB[0]), splitAndSolve(dividedMatrixA[3], dividedMatrixB[2]));
-    vector<vector<int>> c22 = addMatrix(splitAndSolve(dividedMatrixA[2], dividedMatrixB[1]), splitAndSolve(dividedMatrixA[3], dividedMatrixB[3]));
-    return combineMatrix(c11, c12, c21, c22);
+    int newMatrixSize = matrixSize / 2;
+    vector<int> rowVector(matrixSize, 0);
+    vector<vector<int>> a11(matrixSize, rowVector);
+    vector<vector<int>> a12(matrixSize, rowVector);
+    vector<vector<int>> a21(matrixSize, rowVector);
+    vector<vector<int>> a22(matrixSize, rowVector);
+    vector<vector<int>> b11(matrixSize, rowVector);
+    vector<vector<int>> b12(matrixSize, rowVector);
+    vector<vector<int>> b21(matrixSize, rowVector);
+    vector<vector<int>> b22(matrixSize, rowVector);
+    for (int i = 0; i < newMatrixSize; i++) {
+        for (int j = 0; j < newMatrixSize; j++) {
+            a11[i][j] = matrixA[i][j];
+            a12[i][j] = matrixA[i][j + newMatrixSize];
+            a21[i][j] = matrixA[newMatrixSize + i][j];
+            a22[i][j] = matrixA[i + newMatrixSize][j + newMatrixSize];
+            b11[i][j] = matrixB[i][j];
+            b12[i][j] = matrixB[i][j + newMatrixSize];
+            b21[i][j] = matrixB[newMatrixSize + i][j];
+            b22[i][j] = matrixB[i + newMatrixSize][j + newMatrixSize];
+        }
+    }
+    vector<vector<int>> c11 = mergeMatrix(splitAndSolve(a11, b11, newMatrixSize), splitAndSolve(a12, b21, newMatrixSize), newMatrixSize, 1);
+    vector<vector<int>> c12 = mergeMatrix(splitAndSolve(a11, b12, newMatrixSize), splitAndSolve(a12, b22, newMatrixSize), newMatrixSize, 1);
+    vector<vector<int>> c21 = mergeMatrix(splitAndSolve(a21, b11, newMatrixSize), splitAndSolve(a22, b21, newMatrixSize), newMatrixSize, 1);
+    vector<vector<int>> c22 = mergeMatrix(splitAndSolve(a21, b12, newMatrixSize), splitAndSolve(a22, b22, newMatrixSize), newMatrixSize, 1);
+    vector<vector<int> > result(matrixSize, vector<int>(matrixSize, 0));
+    for (int i = 0; i < newMatrixSize; i++) {
+        for (int j = 0; j < newMatrixSize; j++) {
+            result[i][j] = c11[i][j];
+            result[i][j + newMatrixSize] = c12[i][j];
+            result[newMatrixSize + i][j] = c21[i][j];
+            result[i + newMatrixSize][j + newMatrixSize] = c22[i][j];
+        }
+    }
+    return result;
 }
 
 double StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
-    vector<vector<int>> result = splitAndSolve(matrixA, matrixB);
     double sum = 0;
-    for (const vector<int> &row: result) {
+    for (const vector<int> &row: splitAndSolve(matrixA, matrixB, static_cast<int>(matrixA.size()))) {
         for (int v: row) {
             sum += v;
         }
@@ -168,10 +177,11 @@ double StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string
 double StrassenAlgorithm::bruteForce(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
-    vector<vector<int>> result(matrixA.size(), vector<int>(matrixA.size(), 0));
-    for (int i = 0; i < matrixA.size(); i++) {
-        for (int j = 0; j < matrixA.size(); j++) {
-            for (int k = 0; k < matrixA.size(); k++) {
+    int matrixSize = static_cast<int>(matrixA.size());
+    vector<vector<int>> result(matrixSize, vector<int>(matrixSize, 0));
+    for (int i = 0; i < matrixSize; i++) {
+        for (int j = 0; j < matrixSize; j++) {
+            for (int k = 0; k < matrixSize; k++) {
                 result[i][j] += matrixA[i][k] * matrixB[k][j];
             }
         }

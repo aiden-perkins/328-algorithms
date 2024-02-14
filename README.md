@@ -44,17 +44,17 @@ Would run the fastest implementation of ClosestPointPair on test case 10.
 
 This is the amount of time it took to run on my laptop, in seconds. DNF stands for did not finish in under an hour.
 
-| Algorithm                                       | 0 | 1 | 2 | 3 | 4 | 5    | 6      | 7       | 8     | 9     | 10     |
-|:------------------------------------------------|:--|:--|:--|:--|:--|:-----|:-------|:--------|:------|:------|:-------|
-| ClosestPointPair - python - brute force         | 0 | 0 | 0 | 0 | 0 | 0    | 1.96   | 8.20    | 35.14 | DNF   | DNF    |
-| ClosestPointPair - python - divide and conquer  | 0 | 0 | 0 | 0 | 0 | 0    | 0.02   | 0.03    | 0.08  | 2.64  | 5.70   |
-| ClosestPointPair - c++ - brute force            | 0 |   |   |   |   |      |        |         |       |       |        |
-| ClosestPointPair - c++ - divide and conquer     | 0 |   |   |   |   |      |        |         |       |       |        |
-| StrassenAlgorithm - python - brute force        | 0 | 0 | 0 | 0 | 0 | 0.95 | 540.62 | 4211.46 | DNF   | DNF   | DNF    |
-| StrassenAlgorithm - python - divide and conquer | 0 | 0 | 0 | 0 | 0 | 0    | 1.12   | 8.12    | 8.83  | 60.91 | 62.15  | 
-| StrassenAlgorithm - python - strassen           | 0 | 0 | 0 | 0 | 0 | 0    | 0.74   | 3.45    | 3.96  | 20.27 | 21.42  |
-| StrassenAlgorithm - python - python @           | 0 | 0 | 0 | 0 | 0 | 0    | 1.71   | 5.44    | 16.72 | 54.20 | 124.40 |
-| StrassenAlgorithm - python - numpy dot          | 0 | 0 | 0 | 0 | 0 | 0    | 1.06   | 3.18    | 17.32 | 54.21 | 119.80 |
-| StrassenAlgorithm - c++ - brute force           | 0 |   |   |   |   |      |        |         |       |       |        |
-| StrassenAlgorithm - c++ - divide and conquer    | 0 |   |   |   |   |      |        |         |       |       |        |
-| StrassenAlgorithm - c++ - strassen              | 0 |   |   |   |   |      |        |         |       |       |        |
+| Algorithm                                       | 0 | 1 | 2 | 3 | 4 | 5    | 6      | 7       | 8      | 9       | 10      |
+|:------------------------------------------------|:--|:--|:--|:--|:--|:-----|:-------|:--------|:-------|:--------|:--------|
+| ClosestPointPair - python - brute force         | 0 | 0 | 0 | 0 | 0 | 0    | 1.96   | 8.20    | 35.14  | DNF     | DNF     |
+| ClosestPointPair - python - divide and conquer  | 0 | 0 | 0 | 0 | 0 | 0    | 0.02   | 0.03    | 0.08   | 2.64    | 5.70    |
+| ClosestPointPair - c++ - brute force            | 0 | 0 | 0 | 0 | 0 | 0    | 0.87   | 3.45    | 14.04  | DNF     | DNF     |
+| ClosestPointPair - c++ - divide and conquer     | 0 | 0 | 0 | 0 | 0 | 0    | 0.02   | 0.03    | 0.06   | 1.77    | 3.63    |
+| StrassenAlgorithm - python - brute force        | 0 | 0 | 0 | 0 | 0 | 0.95 | 540.62 | 4211.46 | DNF    | DNF     | DNF     |
+| StrassenAlgorithm - python - divide and conquer | 0 | 0 | 0 | 0 | 0 | 0    | 1.12   | 8.12    | 8.83   | 60.91   | 62.15   | 
+| StrassenAlgorithm - python - strassen           | 0 | 0 | 0 | 0 | 0 | 0    | 0.74   | 3.45    | 3.96   | 20.27   | 21.42   |
+| StrassenAlgorithm - python - python @           | 0 | 0 | 0 | 0 | 0 | 0    | 1.71   | 5.44    | 16.72  | 54.20   | 124.40  |
+| StrassenAlgorithm - python - numpy dot          | 0 | 0 | 0 | 0 | 0 | 0    | 1.06   | 3.18    | 17.32  | 54.21   | 119.80  |
+| StrassenAlgorithm - c++ - brute force           | 0 | 0 | 0 | 0 | 0 | 0.04 | 18.03  | 194.89  | 190.56 | 1645.86 | 1584.95 |
+| StrassenAlgorithm - c++ - divide and conquer    | 0 | 0 | 0 | 0 | 0 | 0.04 | 16.17  | 129.30  | 127.81 | 1024.22 | 1024.79 |
+| StrassenAlgorithm - c++ - strassen              | 0 | 0 | 0 | 0 | 0 | 0.03 | 10.76  | 75.83   | 75.75  | 542.05  | 545.16  |

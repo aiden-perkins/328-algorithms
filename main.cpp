@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <functional>
+#include <map>
+#include <algorithm>
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
 using namespace std;
@@ -9,20 +12,55 @@ void display(double answer) {
 }
 
 int main(int argc, char *argv[]) {
-    // cout << argc << argv << endl;
-    // TODO: Make arguments do similar thing to python main.py, not as complicated just so it works.
-    // Add a table to record times
-    /*
-    double a1 = ClosestPointPair::bruteForce("../ClosestPointPair/tests/4.txt");
-    display(a1);
-    double a2 = ClosestPointPair::divideAndConquer("../ClosestPointPair/tests/4.txt");
-    display(a2);
-     */
-    double a3 = StrassenAlgorithm::bruteForce("../StrassenAlgorithm/tests/5a.txt", "../StrassenAlgorithm/tests/5b.txt");
-    display(a3);
-    double a4 = StrassenAlgorithm::divideAndConquer("../StrassenAlgorithm/tests/5a.txt", "../StrassenAlgorithm/tests/5b.txt");
-    display(a4);
-    double a5 = StrassenAlgorithm::strassen("../StrassenAlgorithm/tests/5a.txt", "../StrassenAlgorithm/tests/5b.txt");
-    display(a5);
+    map<string, function<double(string)>> singleFileInput = {
+        {"ClosestPointPairbrute_force", &ClosestPointPair::bruteForce},
+        {"ClosestPointPairdivide_and_conquer", &ClosestPointPair::divideAndConquer},
+        {"ClosestPointPairfastest", &ClosestPointPair::divideAndConquer},
+    };
+    map<string, function<double(string, string)>> multiFileInputAlgorithms = {
+        {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},
+        {"StrassenAlgorithmstrassen", &StrassenAlgorithm::strassen},
+        {"StrassenAlgorithmfastest", &StrassenAlgorithm::strassen},
+        {"StrassenAlgorithmdivide_and_conquer", &StrassenAlgorithm::divideAndConquer},
+    };
+    vector<string> multiFileInput = {"StrassenAlgorithm"};
+
+    if (argc == 2) {
+        // Best method, all test cases
+        for (int i = 0; i < 11; i++) {
+            if (find(multiFileInput.begin(), multiFileInput.end(), (string) argv[1]) != multiFileInput.end()) {
+                string path1 = "../" + (string) argv[1] + "/tests/" + to_string(i) + "a.txt";
+                string path2 = "../" + (string) argv[1] + "/tests/" + to_string(i) + "b.txt";
+                display(multiFileInputAlgorithms[(string) argv[1] + "fastest"](path1, path2));
+            } else {
+                string path = "../" + (string) argv[1] + "/tests/" + to_string(i) + ".txt";
+                display(singleFileInput[(string) argv[1] + "fastest"](path));
+            }
+        }
+    } else if (argc == 3) {
+        // Given method, all test cases
+        for (int i = 0; i < 11; i++) {
+            if (find(multiFileInput.begin(), multiFileInput.end(), (string) argv[1]) != multiFileInput.end()) {
+                string path1 = "../" + (string) argv[1] + "/tests/" + to_string(i) + "a.txt";
+                string path2 = "../" + (string) argv[1] + "/tests/" + to_string(i) + "b.txt";
+                display(multiFileInputAlgorithms[(string) argv[1] + (string) argv[2]](path1, path2));
+            } else {
+                string path = "../" + (string) argv[1] + "/tests/" + to_string(i) + ".txt";
+                display(singleFileInput[(string) argv[1] + (string) argv[2]](path));
+            }
+        }
+    } else if (argc == 4) {
+        // Given method, given test case
+        if (find(multiFileInput.begin(), multiFileInput.end(), (string) argv[1]) != multiFileInput.end()) {
+            string path1 = "../" + (string) argv[1] + "/tests/" + (string) argv[3] + "a.txt";
+            string path2 = "../" + (string) argv[1] + "/tests/" + (string) argv[3] + "b.txt";
+            display(multiFileInputAlgorithms[(string) argv[1] + (string) argv[2]](path1, path2));
+        } else {
+            string path = "../" + (string) argv[1] + "/tests/" + (string) argv[3] + ".txt";
+            display(singleFileInput[(string) argv[1] + (string) argv[2]](path));
+        }
+    } else {
+        cout << "Did not provide the correct parameters, exiting." << endl;
+    }
     return 0;
 }

@@ -21,7 +21,7 @@ def display_results(results):
 if __name__ == '__main__':
     raw_algorithms = {
         'ClosestPointPair': ('divide_and_conquer', True, True),
-        'StrassenAlgorithm': ('strassen', False, False),
+        'StrassenAlgorithm': ('strassen', False, True),
         'MaxContiguousSubsequence': ('kadane', True, True),
     }
     algorithms = {}

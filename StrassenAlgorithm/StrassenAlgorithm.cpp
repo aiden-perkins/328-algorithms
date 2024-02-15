@@ -100,7 +100,7 @@ vector<vector<int>> StrassenAlgorithm::runStrassen(vector<vector<int>> matrixA, 
     return result;
 }
 
-double StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int sum = 0;
@@ -162,10 +162,10 @@ vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA
     return result;
 }
 
-double StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
-    double sum = 0;
+    int sum = 0;
     for (const vector<int> &row: splitAndSolve(matrixA, matrixB, static_cast<int>(matrixA.size()))) {
         for (int v: row) {
             sum += v;
@@ -174,7 +174,7 @@ double StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string
     return sum;
 }
 
-double StrassenAlgorithm::bruteForce(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::bruteForce(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int matrixSize = static_cast<int>(matrixA.size());
@@ -186,7 +186,7 @@ double StrassenAlgorithm::bruteForce(const string& fileAPath, const string& file
             }
         }
     }
-    double sum = 0;
+    int sum = 0;
     for (const vector<int> &row: result) {
         for (int v: row) {
             sum += v;

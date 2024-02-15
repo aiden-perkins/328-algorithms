@@ -9,4 +9,6 @@ add_executable(algorithms
         ClosestPointPair/ClosestPointPair.h
         StrassenAlgorithm/StrassenAlgorithm.cpp
         StrassenAlgorithm/StrassenAlgorithm.h
+        MaxContiguousSubsequence/MaxContiguousSubsequence.cpp
+        MaxContiguousSubsequence/MaxContiguousSubsequence.h
 )

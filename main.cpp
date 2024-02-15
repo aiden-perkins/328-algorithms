@@ -3,6 +3,7 @@
 #include <functional>
 #include <map>
 #include <algorithm>
+#include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
 using namespace std;
@@ -16,6 +17,10 @@ int main(int argc, char *argv[]) {
         {"ClosestPointPairbrute_force", &ClosestPointPair::bruteForce},
         {"ClosestPointPairdivide_and_conquer", &ClosestPointPair::divideAndConquer},
         {"ClosestPointPairfastest", &ClosestPointPair::divideAndConquer},
+        {"MaxContiguousSubsequencebrute_force", &MaxContiguousSubsequence::bruteForce},
+        {"MaxContiguousSubsequencedivide_and_conquer", &MaxContiguousSubsequence::divideAndConquer},
+        {"MaxContiguousSubsequencekadane", &MaxContiguousSubsequence::kadane},
+        {"MaxContiguousSubsequencefastest", &MaxContiguousSubsequence::kadane},
     };
     map<string, function<double(string, string)>> multiFileInputAlgorithms = {
         {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},

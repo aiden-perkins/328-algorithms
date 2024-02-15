@@ -24,7 +24,7 @@ vector<vector<int>> StrassenAlgorithm::parseInput(const string& filePath) {
         }
         file.close();
     }
-    int next2Power = static_cast<int>(pow(2, ceil(log2(matrix.size()))));
+    int next2Power = int(pow(2, ceil(log2(matrix.size()))));
     matrix.resize(next2Power, vector<int>(next2Power, 0));
     for (vector<int> &row : matrix) {
         row.resize(next2Power, 0);
@@ -104,7 +104,7 @@ int StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBPath
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int sum = 0;
-    for (const vector<int> &row: runStrassen(matrixA, matrixB, static_cast<int>(matrixA.size()))) {
+    for (const vector<int> &row: runStrassen(matrixA, matrixB, int(matrixA.size()))) {
         for (int v: row) {
             sum += v;
         }
@@ -166,7 +166,7 @@ int StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& f
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int sum = 0;
-    for (const vector<int> &row: splitAndSolve(matrixA, matrixB, static_cast<int>(matrixA.size()))) {
+    for (const vector<int> &row: splitAndSolve(matrixA, matrixB, int(matrixA.size()))) {
         for (int v: row) {
             sum += v;
         }
@@ -177,7 +177,7 @@ int StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& f
 int StrassenAlgorithm::bruteForce(const string& fileAPath, const string& fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
-    int matrixSize = static_cast<int>(matrixA.size());
+    int matrixSize = int(matrixA.size());
     vector<vector<int>> result(matrixSize, vector<int>(matrixSize, 0));
     for (int i = 0; i < matrixSize; i++) {
         for (int j = 0; j < matrixSize; j++) {

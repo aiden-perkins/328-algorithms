@@ -72,7 +72,7 @@ int MaxContiguousSubsequence::divideAndConquer(const string& filePath) {
 int MaxContiguousSubsequence::bruteForce(const string& filePath) {
     vector<int> nums = parseInput(filePath);
     int maxContigSubseq = 0;
-    int numsSize = static_cast<int>(nums.size());
+    int numsSize = int(nums.size());
     for (int i = 0; i < numsSize; i++) {
         for (int j = i + 1; j <= numsSize; j++) {
             int currentSum = accumulate(nums.begin() + i, nums.begin() + j, 0);

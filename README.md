@@ -3,6 +3,12 @@
 A collection of algorithms I have learned in my CECS 328 course, we don't have to code these, but I thought it would be a cool challenge to see the differences between the speed of the brute force algorithm and the optimized algorithm.
 I did some in c++ so the improvements could be quantified and I didn't have to deal with whether a function I was using in python was compiled in C or not causing the timing to be incosistent.
 
+**Things I've learned:**
+
+* Python's max function can be weirdly slow.
+* In c++, using vector<>.size() also seems to be slow.
+* Parsing text files is a nightmare in c++.
+
 ### Running the Algorithms (python)
 
 * You will need python 3 and numpy, which can be installed with `pip install numpy`
@@ -15,7 +21,7 @@ python3 main.py [OPTIONS]
 | Option                 | Value                                   | Description                                                                                                       |
 |:-----------------------|:----------------------------------------|:------------------------------------------------------------------------------------------------------------------|
 | -a, --algorithm        | algorithm name                          | The algorithm that you wish to run.                                                                               |
-| -tc, --test-case       | 1 - 11                                  | Specify the test case to run, will do all by default. Not all algorithms will have 11 test cases.                 |
+| -tc, --test-case       | 0 - 10                                  | Specify the test case to run, will do all by default.                                                             |
 | -m, --method           | `brute_force` \| `fastest` \| `[other]` | Which method to run, using `brute_force` may take a while depending on the problem, will do `fastest` by default. |
 | -la, --list-algorithms | N/A                                     | Lists the available algorithms you can run.                                                                       |
 | -lm, --list-methods    | algorithm name                          | Lists the available methods that the given algorithm has implemented.                                             |
@@ -26,23 +32,37 @@ So for example:
 
 Would run the fastest implementation of ClosestPointPair on test case 10.
 
+### Running the Algorithms (c++)
+
+* Cmake requirements are in [CMakeLists.txt](CMakeLists.txt)
+
+Once it is compiled, it needs to be in a folder in the root directory, I will fix this later but for now it is like this because clion puts it in `cmake-build-debug` and it runs from there, if it isn't in a folder, the program won't be able to find the test files.
+
+```bash
+./algorithms (algorithm name) [method] [test case]
+```
+
+The algorithm name is required, and if no method is provided then it will run the fastest, and if no test case is provided then it will run them all.
+So for example:
+`./algorithms MaxContiguousSubsequence kadane`
+will run the kadane method on the MaxContiguousSubsequence problem on all test cases.
+
 ### Todo
 
 * Confirm the given answers are correct from the ans.txt file.
-* Maybe merge the different methods of the python algorithms in one file in the folder instead of each method getting its own.
 * Try using arrays instead of vectors in c++.
 
-| Algorithm                   | Instructions | Test Cases | Example | Brute Force | Fastest  | C++ |
-|:----------------------------|:-------------|:-----------|:--------|:------------|:---------|:----|
-| ClosestPointPair            | ✓            | ✓          | ✓       | ✓           | ✓        | ✓   |
-| StrassenAlgorithm           | ✓            | ✓          | ✓       | ✓           | ✓        | ✓   |
-| MaxContiguousSubsequence    | ✓            | ✓          | ✓       | ✓           | ✓        | ✓   |
-| DeterministicOrderSelection | ✓            | ✓          | ✓       |             |          |     |
-| MatrixChainMultiplication   |              |            |         |             |          |     |
-| AllPairsShortestPath        |              | ✓          |         |             |          |     |
-| MinimumSpanningTrees        |              | ✓          | ✓       |             |          |     |
-| HuffmanEncoding             |              | ✓          | no ans  |             |          |     |
-| KnapsackProblem             |              | ✓          |         |             |          |     |
+| Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Brute Force | Fastest | C++ |
+|:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------------|:--------|:----|
+| ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
+| StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
+| MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
+| DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       |             |         |     |
+| MatrixChainMultiplication   |                                           |                                    |              |            |         |             |         |     |
+| AllPairsShortestPath        |                                           | DP: APSP                           |              | ✓          |         |             |         |     |
+| MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |             |         |     |
+| HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |             |         |     |
+| KnapsackProblem             |                                           |                                    |              | ✓          |         |             |         |     |
 
 ### Runtime
 

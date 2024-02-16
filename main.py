@@ -23,6 +23,7 @@ if __name__ == '__main__':
         'ClosestPointPair': ('divide_and_conquer', True, True),
         'StrassenAlgorithm': ('strassen', False, True),
         'MaxContiguousSubsequence': ('kadane', True, True),
+        'DeterministicOrderSelection': ('built_in_sort', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:

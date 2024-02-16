@@ -1,2 +1,1 @@
-from .divide_and_conquer import divide_and_conquer
-from .brute_force import brute_force
+from .ClosestPointPair import brute_force, divide_and_conquer

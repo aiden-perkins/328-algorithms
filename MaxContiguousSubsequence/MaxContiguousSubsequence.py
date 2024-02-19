@@ -43,6 +43,9 @@ def kadane(file_path):
     current_sum = 0
     max_contig_subseq = float('-inf')
     for num in nums:
-        current_sum = max(num, current_sum + num)
-        max_contig_subseq = max(current_sum, max_contig_subseq)
+        current_sum += num
+        if current_sum < num:
+            current_sum = num
+        if current_sum > max_contig_subseq:
+            max_contig_subseq = current_sum
     return max_contig_subseq

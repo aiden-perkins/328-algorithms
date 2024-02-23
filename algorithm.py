@@ -22,7 +22,7 @@ class Algorithm:
             file_a_path = f'./{self.algorithm}/tests/{test_case}a.txt'
             file_b_path = f'./{self.algorithm}/tests/{test_case}b.txt'
             ans = getattr(self.algorithm_pkg, method)(file_a_path, file_b_path)
-        if ans != self.answers[test_case]:
+        if round(ans, 3) != self.answers[test_case]:
             print('WRONG ANSWER')
         total_time = time.time() - start
         return round(ans, 3), round(total_time, 4), test_case

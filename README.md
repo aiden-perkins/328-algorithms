@@ -58,11 +58,11 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓           |         |     |
-| MatrixChainMultiplication   |                                           |                                    |              |            |         |             |         |     |
-| AllPairsShortestPath        |                                           | DP: APSP                           |              | ✓          |         |             |         |     |
+| KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       |             |         |     |
+| MatrixChainMultiplication   |                                           | DP II                              |              |            |         |             |         |     |
+| AllPairsShortestPath        | Shortest path in a graph                  | DP: APSP                           | ✓            | ✓          | ✓       |             |         |     |
 | MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |             |         |     |
 | HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |             |         |     |
-| KnapsackProblem             |                                           |                                    |              | ✓          |         |             |         |     |
 
 ### Runtime
 
@@ -84,14 +84,14 @@ This is the amount of time it took to run on my laptop, in seconds. DNF stands f
 | StrassenAlgorithm - c++ - strassen                       | 0 | 0 | 0 | 0 | 0 | 0    | 6.46    | 44.76   | 45.48  | 330.79  | 335.02  |
 | MaxContiguousSubsequence - python - brute force          | 0 | 0 | 0 | 0 | 0 | 0.14 | 1457.06 | DNF     | DNF    | DNF     | DNF     |
 | MaxContiguousSubsequence - python - divide and conquer   | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.09    | 0.39   | 2.05    | 4.26    |
-| MaxContiguousSubsequence - python - kadane               | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0       | 0.06   | 0.30    | 0.63    |
+| MaxContiguousSubsequence - python - kadane               | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0       | 0.03   | 0.19    | 0.37    |
 | MaxContiguousSubsequence - c++ - brute force             | 0 | 0 | 0 | 0 | 0 | 0.09 | 716.23  | DNF     | DNF    | DNF     | DNF     |
 | MaxContiguousSubsequence - c++ - divide and conquer      | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.06    | 0.23   | 1.21    | 2.50    |
 | MaxContiguousSubsequence - c++ - kadane                  | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0       | 0      | 0.07    | 0.14    |
-| DeterministicOrderSelection - python - brute force       | 0 | 0 | 0 | 0 | 0 | 0    |         |         |        |         |         |
-| DeterministicOrderSelection - python - built in sort     | 0 | 0 | 0 | 0 | 0 | 0    | 0       |         |        |         |         |
+| DeterministicOrderSelection - python - brute force       | 0 | 0 | 0 | 0 | 0 | 0    | 0.08    | 2.21    | 4.90   | 8.21    | 14.22   |
+| DeterministicOrderSelection - python - built in sort     | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.27    | 0.55   | 0.83    | 1.40    |
 | DeterministicOrderSelection - python - median of medians | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
-| DeterministicOrderSelection - python - quick select      | 0 | 0 | 0 | 0 | 0 | 0    |         |         |        |         |         |
+| DeterministicOrderSelection - python - quick select      | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.28    | 0.75   | 1.33    | 1.77    |
 | DeterministicOrderSelection - c++ - brute force          | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
 | DeterministicOrderSelection - c++ - built in sort        | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
 | DeterministicOrderSelection - c++ - median of medians    | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |

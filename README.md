@@ -8,6 +8,7 @@ I did some in c++ so the improvements could be quantified and I didn't have to d
 * Python's max function can be weirdly slow.
 * In c++, using vector<>.size() also seems to be slow.
 * Parsing text files is a nightmare in c++.
+* The deepcopy function in the copy library in python is expensive.
 
 ### Running the Algorithms (python)
 
@@ -51,16 +52,17 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 * Confirm the given answers are correct from the ans.txt file for c++.
 * Try using arrays instead of vectors in c++.
+* In dos python for the median of medians method, use the partition function and not what it currently does.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Brute Force | Fastest | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------------|:--------|:----|
 | ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
-| DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓           |         |     |
+| DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓           | ✓       |     |
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       |             |         |     |
 | MatrixChainMultiplication   |                                           | DP II                              |              |            |         |             |         |     |
-| AllPairsShortestPath        | Shortest path in a graph                  | DP: APSP                           | ✓            | ✓          | ✓       |             |         |     |
+| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       |             |         |     |
 | MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |             |         |     |
 | HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |             |         |     |
 

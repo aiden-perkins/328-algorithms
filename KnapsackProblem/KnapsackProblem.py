@@ -35,7 +35,7 @@ def dp_recursion(bricks, capacity, cache, bricks_size):
     return cache[capacity][bricks_size]
 
 
-def dynmaic_programming_recursion(file_path):
+def dynamic_programming_recursion(file_path):
     # This solution works in solving the problem, however due to python's built in recursion limit, which we
     # cannot change, this will fail the 10th file and crash, it gets 0-9 correct though slightly slower.
     file_contents = open(file_path).read()[1:-3].split(', {')

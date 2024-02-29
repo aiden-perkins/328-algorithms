@@ -1,5 +1,4 @@
 #include <fstream>
-#include <iostream>
 #include <algorithm>
 #include "DeterministicOrderSelection.h"
 using namespace std;
@@ -39,15 +38,51 @@ int DeterministicOrderSelection::select(int* nums, int numsSize, int k) {
         sort(nums, nums + numsSize);
         return nums[k - 1];
     }
-    vector<int> medians;
-    for (int i = 0; i < ((numsSize - 1) / 5) + 1; i++) {
-        // TODO
+    int mediansSize = (numsSize - 1) / 5 + 1;
+    int* medians = new int[mediansSize];
+    for (int i = 0; i < mediansSize; i++) {
+        int groupSize = min(5, numsSize - (i * 5));
+        sort(nums + (i * 5), nums + (i * 5) + groupSize);
+        medians[i] = nums[(i * 5) + (groupSize / 2)];
     }
+    int median = select(medians, mediansSize, (mediansSize / 10) + 1);
+    delete[] medians;
+    int medianIndex;
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] == median) {
+            medianIndex = i;
+        }
+    }
+    if (!medianIndex) {
+        throw runtime_error("Did not find median in nums");
+    }
+    swap(nums[numsSize - 1], nums[medianIndex]);
+    int pivot = partition(nums, 0, numsSize);
+    if (pivot + 1 == k) {
+        return median;
+    } else if (k > pivot) {
+        return select(nums + pivot + 1, numsSize - pivot - 1, k - pivot - 1);
+    } else if (k < pivot + 1) {
+        return select(nums, pivot, k);
+    }
+    return median;  // Shouldn't ever reach this, but just here to suppress the warning
 }
 
 int DeterministicOrderSelection::medianOfMedians(const string& filePath) {
-    // TODO
-    return 0;
+    vector<string> input = parseInput(filePath);
+    int numsSize = int(input.size()) - 1;
+    int* nums = new int[numsSize];
+    int k = stoi(input[numsSize].substr(1));
+    for (int i = 0; i < numsSize; i++) {
+        if (i < 1) {
+            nums[i] = stoi(input[i].substr(1));
+        } else {
+            nums[i] = stoi(input[i]);
+        }
+    }
+    int ans = select(nums, numsSize, k);
+    delete[] nums;
+    return ans;
 }
 
 void DeterministicOrderSelection::quickSort(int* nums, int left, int right) {
@@ -85,19 +120,18 @@ int DeterministicOrderSelection::quickSelectRecursion(int* nums, int numsSize, i
     if (pivot == k) {
         return nums[k];
     } else if (k < pivot) {
-        // TODO
-        return quickSelectRecursion();
+        return quickSelectRecursion(nums, pivot, k);
     } else if (k > pivot) {
-        // TODO
-        return quickSelectRecursion();
+        return quickSelectRecursion(nums + pivot + 1, numsSize - pivot - 1, k - pivot - 1);
     }
+    return nums[k];  // Shouldn't ever reach this, but just here to suppress the warning
 }
 
 int DeterministicOrderSelection::quickSelect(const string& filePath) {
     vector<string> input = parseInput(filePath);
     int numsSize = int(input.size()) - 1;
     int* nums = new int[numsSize];
-    int k = stoi(input[numsSize].substr(1));
+    int k = stoi(input[numsSize].substr(1)) - 1;
     for (int i = 0; i < numsSize; i++) {
         if (i < 1) {
             nums[i] = stoi(input[i].substr(1));

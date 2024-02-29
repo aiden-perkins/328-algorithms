@@ -11,8 +11,8 @@ add_executable(algorithms
         StrassenAlgorithm/StrassenAlgorithm.h
         MaxContiguousSubsequence/MaxContiguousSubsequence.cpp
         MaxContiguousSubsequence/MaxContiguousSubsequence.h
-#        DeterministicOrderSelection/DeterministicOrderSelection.cpp
-#        DeterministicOrderSelection/DeterministicOrderSelection.h
+        DeterministicOrderSelection/DeterministicOrderSelection.cpp
+        DeterministicOrderSelection/DeterministicOrderSelection.h
         KnapsackProblem/KnapsackProblem.cpp
         KnapsackProblem/KnapsackProblem.h
 )

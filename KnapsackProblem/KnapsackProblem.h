@@ -9,7 +9,7 @@ class KnapsackProblem {
     private:
         struct Brick;
         static vector<Brick> parseInput(const string&);
-        static int bf_recursion();
+        static int bf_recursion(vector<Brick>, int, int);
         static int dpRecursion(vector<Brick>, vector<vector<int>>&, int, int);
     public:
         static int dynamicProgrammingRecursion(const string&);

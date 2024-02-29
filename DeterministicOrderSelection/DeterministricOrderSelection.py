@@ -44,7 +44,6 @@ def select(nums, k):
         group = sorted(nums[i * 5:(i * 5) + 5])
         medians.append(group[len(group) // 2])
     median = select(medians, len(nums) // 10)
-    # TODO: maybe use partition function, its probably faster
     left = []
     right = []
     for num in nums:

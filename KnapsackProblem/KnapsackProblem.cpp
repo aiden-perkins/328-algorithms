@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-#include <iostream>
 #include <fstream>
 #include "KnapsackProblem.h"
 using namespace std;
@@ -33,15 +32,24 @@ vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string& filePat
     return bricks;
 }
 
-int KnapsackProblem::bf_recursion() {
-    return 0;
+int KnapsackProblem::bf_recursion(vector<Brick> bricks, int x, int y) {
+    if (!x || !y) {
+        return 0;
+    }
+    if (bricks[y - 1].weight > x) {
+        return bf_recursion(bricks, x, y - 1);
+    }
+    return max(
+        bf_recursion(bricks, x, y - 1),
+        bf_recursion(bricks, x - bricks[y - 1].weight, y - 1) + bricks[y - 1].value
+    );
 }
 
 int KnapsackProblem::bruteForce(const string& filePath) {
     vector<Brick> bricks = parseInput(filePath);
     int capacity = bricks.back().value;
     bricks.pop_back();
-    return 0;
+    return bf_recursion(bricks, capacity, int(bricks.size()));
 }
 
 int KnapsackProblem::dpRecursion(vector<Brick> bricks, vector<vector<int>> &cache, int x, int y) {

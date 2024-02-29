@@ -6,7 +6,7 @@
 #include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
-//#include "DeterministicOrderSelection/DeterministicOrderSelection.h"
+#include "DeterministicOrderSelection/DeterministicOrderSelection.h"
 #include "KnapsackProblem/KnapsackProblem.h"
 using namespace std;
 
@@ -24,11 +24,11 @@ int main(int argc, char *argv[]) {
         {"MaxContiguousSubsequencedivide_and_conquer", &MaxContiguousSubsequence::divideAndConquer},
         {"MaxContiguousSubsequencekadane", &MaxContiguousSubsequence::kadane},
         {"MaxContiguousSubsequencefastest", &MaxContiguousSubsequence::kadane},
-//        {"DeterministicOrderSelectionbrute_force", &DeterministicOrderSelection::bruteForce},
-//        {"DeterministicOrderSelectionbuilt_in_sort", &DeterministicOrderSelection::builtInSort},
-//        {"DeterministicOrderSelectionfastest", &DeterministicOrderSelection::builtInSort},
-//        {"DeterministicOrderSelectionedian_of_medians", &DeterministicOrderSelection::medianOfMedians},
-//        {"DeterministicOrderSelectionquick_select", &DeterministicOrderSelection::quickSelect},
+        {"DeterministicOrderSelectionbrute_force", &DeterministicOrderSelection::bruteForce},
+        {"DeterministicOrderSelectionbuilt_in_sort", &DeterministicOrderSelection::builtInSort},
+        {"DeterministicOrderSelectionfastest", &DeterministicOrderSelection::builtInSort},
+        {"DeterministicOrderSelectionmedian_of_medians", &DeterministicOrderSelection::medianOfMedians},
+        {"DeterministicOrderSelectionquick_select", &DeterministicOrderSelection::quickSelect},
         {"KnapsackProblembrute_force", &KnapsackProblem::bruteForce},
         {"KnapsackProblemdynamic_programming_recursion", &KnapsackProblem::dynamicProgrammingRecursion},
         {"KnapsackProblemdynamic_programming", &KnapsackProblem::dynamicProgramming},

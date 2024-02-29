@@ -1,1 +1,1 @@
-from .KnapsackProblem import brute_force, dynamic_programming
+from .KnapsackProblem import brute_force, dynamic_programming, dynamic_programming_recursion

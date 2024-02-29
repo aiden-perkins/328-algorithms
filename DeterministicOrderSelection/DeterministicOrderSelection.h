@@ -7,9 +7,11 @@ using namespace std;
 
 class DeterministicOrderSelection {
     private:
-        static int* parseInput(const string&);
-        static int partition(vector<int>, int, int);
-        static int quickSelectRecursion(vector<int>, int);
+        static vector<string> parseInput(const string&);
+        static int partition(int*, int, int);
+        static int quickSelectRecursion(int*, int, int);
+        static void quickSort(int*, int, int);
+        static int select(int*, int, int);
     public:
         static int medianOfMedians(const string&);
         static int bruteForce(const string&);

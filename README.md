@@ -53,6 +53,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 * Confirm the given answers are correct from the ans.txt file for c++.
 * Try using arrays instead of vectors in c++.
 * In dos python for the median of medians method, use the partition function and not what it currently does.
+* Replace pair with struct for some of the c++ code.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Brute Force | Fastest | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------------|:--------|:----|
@@ -60,7 +61,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓            | ✓          | ✓       | ✓           | ✓       | ✓   |
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓           | ✓       |     |
-| KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       |             |         |     |
+| KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓           | ✓       |     |
 | MatrixChainMultiplication   |                                           | DP II                              |              |            |         |             |         |     |
 | AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       |             |         |     |
 | MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |             |         |     |
@@ -92,9 +93,15 @@ This is the amount of time it took to run on my laptop, in seconds. DNF stands f
 | MaxContiguousSubsequence - c++ - kadane                  | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0       | 0      | 0.07    | 0.14    |
 | DeterministicOrderSelection - python - brute force       | 0 | 0 | 0 | 0 | 0 | 0    | 0.08    | 2.21    | 4.90   | 8.21    | 14.22   |
 | DeterministicOrderSelection - python - built in sort     | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.27    | 0.55   | 0.83    | 1.40    |
-| DeterministicOrderSelection - python - median of medians | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
+| DeterministicOrderSelection - python - median of medians | 0 | 0 | 0 | 0 | 0 | 0    | 0.03    | 0.66    | 1.33   | 2.08    | 3.55    |
 | DeterministicOrderSelection - python - quick select      | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.28    | 0.75   | 1.33    | 1.77    |
 | DeterministicOrderSelection - c++ - brute force          | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
-| DeterministicOrderSelection - c++ - built in sort        | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
+| DeterministicOrderSelection - c++ - built in sort        | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.22    | 0.56   | 0.89    | 1.23    |
 | DeterministicOrderSelection - c++ - median of medians    | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
 | DeterministicOrderSelection - c++ - quick select         | 0 | 0 | 0 | 0 | 0 |      |         |         |        |         |         |
+| KnapsackProblem - python - brute force                   |   |   |   |   |   |      |         |         |        |         |         |
+| KnapsackProblem - python - dynamic programming recursion |   |   |   |   |   |      |         |         |        |         |         |
+| KnapsackProblem - python - dynamic programming           | 0 | 0 | 0 | 0 | 0 | 0    | 0       | 0.14    | 1.80   | 7.95    | 49.78   |
+| KnapsackProblem - c++ - brute force                      |   |   |   |   |   |      |         |         |        |         |         |
+| KnapsackProblem - c++ - dynamic programming recursion    |   |   |   |   |   |      |         |         |        |         |         |
+| KnapsackProblem - c++ - dynamic programming              |   |   |   |   |   |      |         |         |        |         |         |

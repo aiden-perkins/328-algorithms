@@ -37,7 +37,7 @@ int MaxContiguousSubsequence::splitAndSolve(vector<int> nums) {
     if (nums.size() == 1) {
         return nums[0];
     }
-    int middle = floor(nums.size() / 2);
+    int middle = int(nums.size() / 2);
     vector<int> left(nums.begin(), nums.begin() + middle);
     vector<int> right(nums.begin() + middle, nums.end());
     return max(max(splitAndSolve(left), splitAndSolve(right)), solveMiddle(nums, middle));

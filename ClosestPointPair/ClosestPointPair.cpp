@@ -56,7 +56,7 @@ double ClosestPointPair::splitAndSolve(vector<pair<double, double>> points) {
         }
         return bruteForceMin;
     }
-    int middleIndex = floor(points.size() / 2);
+    int middleIndex = int(points.size() / 2);
     vector<pair<double, double>> leftPoints(points.begin(), points.begin() + middleIndex);
     vector<pair<double, double>> rightPoints(points.begin() + middleIndex, points.end());
     double newMin = min(splitAndSolve(leftPoints), splitAndSolve(rightPoints));

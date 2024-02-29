@@ -7,9 +7,11 @@ using namespace std;
 
 class ClosestPointPair {
     private:
-        static double splitAndSolve(vector<pair<double, double>>);
-        static bool sortSecond(const pair<double, double> &, const pair<double, double> &);
-        static vector<pair<double, double>> parseInput(const string&);
+        struct Point;
+        static double splitAndSolve(vector<Point>);
+        static bool sortY(const Point &, const Point &);
+        static bool sortX(const Point &, const Point &);
+        static vector<Point> parseInput(const string&);
     public:
         static double divideAndConquer(const string&);
         static double bruteForce(const string&);

@@ -3,11 +3,12 @@
 #include <functional>
 #include <map>
 #include <algorithm>
-#include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
+#include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
 #include "DeterministicOrderSelection/DeterministicOrderSelection.h"
 #include "KnapsackProblem/KnapsackProblem.h"
+#include "MatrixChainMultiplication/MatrixChainMultiplication.h"
 using namespace std;
 
 void display(double answer) {
@@ -32,6 +33,14 @@ int main(int argc, char *argv[]) {
         {"KnapsackProblembrute_force", &KnapsackProblem::bruteForce},
         {"KnapsackProblemdynamic_programming_recursion", &KnapsackProblem::dynamicProgrammingRecursion},
         {"KnapsackProblemdynamic_programming", &KnapsackProblem::dynamicProgramming},
+        {"KnapsackProblemfastest", &KnapsackProblem::dynamicProgramming},
+        {"MatrixChainMultiplicationbrute_force", &MatrixChainMultiplication::bruteForce},
+        {
+            "MatrixChainMultiplicationdynamic_programming_recursion",
+            &MatrixChainMultiplication::dynamicProgrammingRecursion
+        },
+        {"MatrixChainMultiplicationdynamic_programming", &MatrixChainMultiplication::dynamicProgramming},
+        {"MatrixChainMultiplicationfastest", &MatrixChainMultiplication::dynamicProgramming},
     };
     map<string, function<double(string, string)>> multiFileInput = {
         {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},

@@ -32,16 +32,16 @@ vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string& filePat
     return bricks;
 }
 
-int KnapsackProblem::bf_recursion(vector<Brick> bricks, int x, int y) {
+int KnapsackProblem::bfRecursion(vector<Brick> bricks, int x, int y) {
     if (!x || !y) {
         return 0;
     }
     if (bricks[y - 1].weight > x) {
-        return bf_recursion(bricks, x, y - 1);
+        return bfRecursion(bricks, x, y - 1);
     }
     return max(
-        bf_recursion(bricks, x, y - 1),
-        bf_recursion(bricks, x - bricks[y - 1].weight, y - 1) + bricks[y - 1].value
+        bfRecursion(bricks, x, y - 1),
+        bfRecursion(bricks, x - bricks[y - 1].weight, y - 1) + bricks[y - 1].value
     );
 }
 
@@ -49,7 +49,7 @@ int KnapsackProblem::bruteForce(const string& filePath) {
     vector<Brick> bricks = parseInput(filePath);
     int capacity = bricks.back().value;
     bricks.pop_back();
-    return bf_recursion(bricks, capacity, int(bricks.size()));
+    return bfRecursion(bricks, capacity, int(bricks.size()));
 }
 
 int KnapsackProblem::dpRecursion(vector<Brick> bricks, vector<vector<int>> &cache, int x, int y) {

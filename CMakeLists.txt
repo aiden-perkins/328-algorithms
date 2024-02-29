@@ -15,4 +15,6 @@ add_executable(algorithms
         DeterministicOrderSelection/DeterministicOrderSelection.h
         KnapsackProblem/KnapsackProblem.cpp
         KnapsackProblem/KnapsackProblem.h
+        MatrixChainMultiplication/MatrixChainMultiplication.cpp
+        MatrixChainMultiplication/MatrixChainMultiplication.h
 )

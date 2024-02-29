@@ -25,4 +25,4 @@ class Algorithm:
         if round(ans, 3) != self.answers[test_case]:
             print('WRONG ANSWER')
         total_time = time.time() - start
-        return round(ans, 3), round(total_time, 4), test_case
+        return round(ans, 3), round(total_time, 3), test_case

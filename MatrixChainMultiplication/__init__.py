@@ -1,0 +1,1 @@
+from .MatrixChainMultiplication import brute_force, dynamic_programming, dynamic_programming_recursion

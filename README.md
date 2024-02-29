@@ -5,7 +5,7 @@ I did some in c++ so the improvements could be quantified and I didn't have to d
 
 **Things I've learned:**
 
-* Python's max function can be weirdly slow.
+* Python's max function can be [weirdly slow](https://stackoverflow.com/questions/56281691/why-is-max-function-so-much-slower-when-comparing-2-elements-vs-direct-compari).
 * In c++, using vector<>.size() also seems to be slow.
 * Parsing text files is a nightmare in c++.
 * The deepcopy function in the copy library in python is expensive.
@@ -52,7 +52,6 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 * Confirm the given answers are correct from the ans.txt file for c++.
 * Try using arrays instead of vectors in c++.
-* Replace pair with struct for some of the c++ code.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Timed | Python | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------|:-------|:----|
@@ -68,41 +67,48 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 ### Runtime
 
-This is the amount of time it took to run on my laptop, in seconds. DNF stands for did not finish in under an hour.
+- Times are in seconds.
+- For c++, if it ran in 25 or less ms, then I just put 0.
+- DNF means that it did not finish in under an hour.
+- Times are from running the algorithms on my laptop, the specs are:
+  * intel i7 11800h 8c/16t @ 2.30 GHz
+  * 16gb 3200 MHz SODIMM
+  * RTX 3050 Ti Mobile
+  * Micron 2300 NVMe 512gb
 
-| Algorithm                                                | 0 | 1 | 2 | 3 | 4    | 5    | 6       | 7       | 8      | 9       | 10              |
-|:---------------------------------------------------------|:--|:--|:--|:--|:-----|:-----|:--------|:--------|:-------|:--------|:----------------|
-| ClosestPointPair - python - brute force                  | 0 | 0 | 0 | 0 | 0    | 0    | 1.96    | 8.20    | 35.14  | DNF     | DNF             |
-| ClosestPointPair - python - divide and conquer           | 0 | 0 | 0 | 0 | 0    | 0    | 0.02    | 0.03    | 0.08   | 2.64    | 5.70            |
-| ClosestPointPair - c++ - brute force                     | 0 | 0 | 0 | 0 | 0    | 0    | 0.46    | 1.90    | 8.01   | DNF     | DNF             |
-| ClosestPointPair - c++ - divide and conquer              | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0       | 0      | 0.88    | 1.86            |
-| StrassenAlgorithm - python - brute force                 | 0 | 0 | 0 | 0 | 0    | 0.95 | 540.62  | 4211.46 | DNF    | DNF     | DNF             |
-| StrassenAlgorithm - python - divide and conquer          | 0 | 0 | 0 | 0 | 0    | 0    | 1.12    | 8.12    | 8.83   | 60.91   | 62.15           | 
-| StrassenAlgorithm - python - strassen                    | 0 | 0 | 0 | 0 | 0    | 0    | 0.74    | 3.45    | 3.96   | 20.27   | 21.42           |
-| StrassenAlgorithm - python - python @                    | 0 | 0 | 0 | 0 | 0    | 0    | 1.71    | 5.44    | 16.72  | 54.20   | 124.40          |
-| StrassenAlgorithm - python - numpy dot                   | 0 | 0 | 0 | 0 | 0    | 0    | 1.06    | 3.18    | 17.32  | 54.21   | 119.80          |
-| StrassenAlgorithm - c++ - brute force                    | 0 | 0 | 0 | 0 | 0    | 0    | 10.53   | 99.27   | 100.13 | 1036.20 | 1018.39         |
-| StrassenAlgorithm - c++ - divide and conquer             | 0 | 0 | 0 | 0 | 0    | 0    | 10.13   | 80.91   | 83.00  | 664.17  | 667.40          |
-| StrassenAlgorithm - c++ - strassen                       | 0 | 0 | 0 | 0 | 0    | 0    | 6.46    | 44.76   | 45.48  | 330.79  | 335.02          |
-| MaxContiguousSubsequence - python - brute force          | 0 | 0 | 0 | 0 | 0    | 0.14 | 1457.06 | DNF     | DNF    | DNF     | DNF             |
-| MaxContiguousSubsequence - python - divide and conquer   | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.09    | 0.39   | 2.05    | 4.26            |
-| MaxContiguousSubsequence - python - kadane               | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0       | 0.03   | 0.19    | 0.37            |
-| MaxContiguousSubsequence - c++ - brute force             | 0 | 0 | 0 | 0 | 0    | 0.09 | 716.23  | DNF     | DNF    | DNF     | DNF             |
-| MaxContiguousSubsequence - c++ - divide and conquer      | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.06    | 0.23   | 1.21    | 2.50            |
-| MaxContiguousSubsequence - c++ - kadane                  | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0       | 0      | 0.07    | 0.14            |
-| DeterministicOrderSelection - python - brute force       | 0 | 0 | 0 | 0 | 0    | 0    | 0.08    | 2.21    | 4.90   | 8.21    | 14.22           |
-| DeterministicOrderSelection - python - built in sort     | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.27    | 0.55   | 0.83    | 1.40            |
-| DeterministicOrderSelection - python - median of medians | 0 | 0 | 0 | 0 | 0    | 0    | 0.03    | 0.66    | 1.33   | 2.08    | 3.55            |
-| DeterministicOrderSelection - python - quick select      | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.28    | 0.75   | 1.33    | 1.77            |
-| DeterministicOrderSelection - c++ - brute force          | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
-| DeterministicOrderSelection - c++ - built in sort        | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.22    | 0.56   | 0.89    | 1.23            |
-| DeterministicOrderSelection - c++ - median of medians    | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
-| DeterministicOrderSelection - c++ - quick select         | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
-| KnapsackProblem - python - brute force                   | 0 | 0 | 0 | 0 | 0.23 | DNF  | DNF     | DNF     | DNF    | DNF     | DNF             |
-| KnapsackProblem - python - dynamic programming recursion | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.19    | 2.57   | 10.85   | DNF<sup>1</sup> |
-| KnapsackProblem - python - dynamic programming           | 0 | 0 | 0 | 0 | 0    | 0    | 0       | 0.14    | 1.65   | 7.18    | 45.76           |
-| KnapsackProblem - c++ - brute force                      | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
-| KnapsackProblem - c++ - dynamic programming recursion    | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
-| KnapsackProblem - c++ - dynamic programming              | 0 | 0 | 0 | 0 | 0    |      |         |         |        |         |                 |
+| Algorithm                                                | 0 | 1 | 2 | 3 | 4     | 5     | 6       | 7       | 8       | 9       | 10              |
+|:---------------------------------------------------------|:--|:--|:--|:--|:------|:------|:--------|:--------|:--------|:--------|:----------------|
+| ClosestPointPair - python - brute force                  | 0 | 0 | 0 | 0 | 0     | 0     | 2.065   | 8.538   | 35.974  | DNF     | DNF             |
+| ClosestPointPair - python - divide and conquer           | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.031   | 0.078   | 2.643   | 5.636           |
+| ClosestPointPair - c++ - brute force                     | 0 | 0 | 0 | 0 | 0     | 0     | 0.486   | 1.947   | 7.775   | DNF     | DNF             |
+| ClosestPointPair - c++ - divide and conquer              | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0       | 0.047   | 1.049   | 2.173           |
+| StrassenAlgorithm - python - brute force                 | 0 | 0 | 0 | 0 | 0     | 0.955 | 540.62  | DNF     | DNF     | DNF     | DNF             |
+| StrassenAlgorithm - python - divide and conquer          | 0 | 0 | 0 | 0 | 0     | 0     | 1.158   | 8.089   | 8.752   | 61.469  | 62.317          | 
+| StrassenAlgorithm - python - strassen                    | 0 | 0 | 0 | 0 | 0     | 0     | 0.705   | 3.221   | 3.769   | 19.539  | 20.643          |
+| StrassenAlgorithm - python - python @                    | 0 | 0 | 0 | 0 | 0     | 0     | 1.706   | 5.422   | 16.341  | 51.384  | 123.500         |
+| StrassenAlgorithm - python - numpy dot                   | 0 | 0 | 0 | 0 | 0     | 0     | 1.064   | 3.270   | 16.195  | 51.726  | 118.541         |
+| StrassenAlgorithm - c++ - brute force                    | 0 | 0 | 0 | 0 | 0     | 0.034 | 10.596  | 100.985 | 101.064 | 1036.20 | 1018.39         |
+| StrassenAlgorithm - c++ - divide and conquer             | 0 | 0 | 0 | 0 | 0     | 0.034 | 10.517  | 83.825  | 85.642  | 664.17  | 667.40          |
+| StrassenAlgorithm - c++ - strassen                       | 0 | 0 | 0 | 0 | 0     | 0.034 | 6.666   | 47.376  | 47.576  | 330.79  | 335.02          |
+| MaxContiguousSubsequence - python - brute force          | 0 | 0 | 0 | 0 | 0     | 0.142 | 1457.06 | DNF     | DNF     | DNF     | DNF             |
+| MaxContiguousSubsequence - python - divide and conquer   | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.094   | 0.392   | 2.197   | 4.396           |
+| MaxContiguousSubsequence - python - kadane               | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0       | 0.031   | 0.189   | 0.391           |
+| MaxContiguousSubsequence - c++ - brute force             | 0 | 0 | 0 | 0 | 0     | 0.100 | 716.23  | DNF     | DNF     | DNF     | DNF             |
+| MaxContiguousSubsequence - c++ - divide and conquer      | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.069   | 0.248   | 1.243   | 2.487           |
+| MaxContiguousSubsequence - c++ - kadane                  | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0       | 0.042   | 0.148   | 0.299           |
+| DeterministicOrderSelection - python - brute force       | 0 | 0 | 0 | 0 | 0     | 0     | 0.078   | 2.237   | 4.923   | 8.206   | 14.286          |
+| DeterministicOrderSelection - python - built in sort     | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.267   | 0.563   | 0.828   | 1.447           |
+| DeterministicOrderSelection - python - median of medians | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.642   | 1.297   | 2.001   | 3.451           |
+| DeterministicOrderSelection - python - quick select      | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.298   | 0.750   | 1.335   | 1.818           |
+| DeterministicOrderSelection - c++ - brute force          | 0 | 0 | 0 | 0 | 0     | 0     | 0.029   | 0.395   | 0.810   | 1.276   | 1.938           |
+| DeterministicOrderSelection - c++ - built in sort        | 0 | 0 | 0 | 0 | 0     | 0     | 0.030   | 0.385   | 0.762   | 1.154   | 1.839           |
+| DeterministicOrderSelection - c++ - median of medians    | 0 | 0 | 0 | 0 | 0     | 0     | 0.028   | 0.276   | 0.672   | 0.978   | 1.755           |
+| DeterministicOrderSelection - c++ - quick select         | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.269   | 0.540   | 0.833   | 1.375           |
+| KnapsackProblem - python - brute force                   | 0 | 0 | 0 | 0 | 0.236 | DNF   | DNF     | DNF     | DNF     | DNF     | DNF             |
+| KnapsackProblem - python - dynamic programming recursion | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.189   | 2.472   | 10.393  | DNF<sup>1</sup> |
+| KnapsackProblem - python - dynamic programming           | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0.142   | 1.672   | 7.333   | 46.907          |
+| KnapsackProblem - c++ - brute force                      | 0 | 0 | 0 | 0 | 0.100 |       |         |         |         |         |                 |
+| KnapsackProblem - c++ - dynamic programming recursion    | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 1.405   | 29.909  | 251.501 |                 |
+| KnapsackProblem - c++ - dynamic programming              | 0 | 0 | 0 | 0 | 0     | 0     | 0       | 0       | 0.109   | 0.422   | 2.608           |
 
-_DNF<sup>1</sup>.  Python crashed due to recursion limits._
+_DNF<sup>1</sup>.  Python crashed due to recursion limits, would probably finish otherwise._

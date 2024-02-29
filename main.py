@@ -25,6 +25,7 @@ if __name__ == '__main__':
         'MaxContiguousSubsequence': ('kadane', True, True),
         'DeterministicOrderSelection': ('built_in_sort', True, True),
         'KnapsackProblem': ('dynamic_programming', True, True),
+        'MatrixChainMultiplication': ('dynamic_programming', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:
@@ -46,7 +47,8 @@ if __name__ == '__main__':
     parser.add_argument(
         '-m',
         '--method',
-        help='Which method to run, using brute_force may take a while depending on the problem, will do fastest by default'
+        help='Which method to run, using brute_force may take a while depending on the problem,'
+             'will do fastest by default'
     )
     parser.add_argument(
         '-la',
@@ -74,4 +76,4 @@ if __name__ == '__main__':
             tests_to_run = list(range(start, 11))
         for test_case in tests_to_run:
             ans, total_time, test_num = algo.run_algorithm(args.method, test_case)
-            print(f'{test_num}. {ans:<.3f} | took {total_time:<.4f} seconds.')
+            print(f'{test_num}. {ans:<.3f} | took {total_time:<.3f} seconds.')

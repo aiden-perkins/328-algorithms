@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <numeric>
-#include <cmath>
 #include <algorithm>
 #include "MaxContiguousSubsequence.h"
 using namespace std;

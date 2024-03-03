@@ -41,7 +41,9 @@ int MatrixChainMultiplication::bfRecursion(MatrixSize* matrices, int i, int j) {
         int m = matrices[i].x * matrices[k + i + 1].x * matrices[j].y;
         values[k] = bfRecursion(matrices, i, k + i) + bfRecursion(matrices, k + i + 1, j) + m;
     }
-    return *min_element(values, values + (j - i));
+    int min = *min_element(values, values + (j - i));
+    delete [] values;
+    return min;
 }
 
 int MatrixChainMultiplication::bruteForce(const string& filePath) {
@@ -67,6 +69,7 @@ int MatrixChainMultiplication::dpRecursion(MatrixSize *matrices, int i, int j, i
         values[k] = dpRecursion(matrices, i, k + i, cache) + dpRecursion(matrices, k + i + 1, j, cache) + m;
     }
     cache[i][j] = *min_element(values, values + (j - i));
+    delete [] values;
     return cache[i][j];
 }
 

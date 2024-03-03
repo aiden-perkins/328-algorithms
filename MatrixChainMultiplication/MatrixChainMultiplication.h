@@ -7,9 +7,10 @@ using namespace std;
 
 class MatrixChainMultiplication {
     private:
-        static vector<int> parseInput(const string&);
-        static int bfRecursion();
-        static int dpRecursion();
+        struct MatrixSize;
+        static vector<MatrixSize> parseInput(const string&);
+        static int bfRecursion(MatrixSize*, int, int);
+        static int dpRecursion(MatrixSize*, int, int, int**);
     public:
         static int bruteForce(const string&);
         static int dynamicProgrammingRecursion(const string&);

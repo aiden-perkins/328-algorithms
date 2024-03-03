@@ -32,61 +32,88 @@ vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string& filePat
     return bricks;
 }
 
-int KnapsackProblem::bfRecursion(vector<Brick> bricks, int x, int y) {
-    if (!x || !y) {
+int KnapsackProblem::bfRecursion(Brick *bricks, int bricksSize, int capacity) {
+    if (!bricksSize || !capacity) {
         return 0;
     }
-    if (bricks[y - 1].weight > x) {
-        return bfRecursion(bricks, x, y - 1);
+    if (bricks[bricksSize - 1].weight > capacity) {
+        return bfRecursion(bricks, bricksSize - 1, capacity);
     }
     return max(
-        bfRecursion(bricks, x, y - 1),
-        bfRecursion(bricks, x - bricks[y - 1].weight, y - 1) + bricks[y - 1].value
+        bfRecursion(bricks, bricksSize - 1, capacity),
+        bfRecursion(bricks, bricksSize - 1, capacity - bricks[bricksSize - 1].weight) + bricks[bricksSize - 1].value
     );
 }
 
 int KnapsackProblem::bruteForce(const string& filePath) {
-    vector<Brick> bricks = parseInput(filePath);
-    int capacity = bricks.back().value;
-    bricks.pop_back();
-    return bfRecursion(bricks, capacity, int(bricks.size()));
+    vector<Brick> bricksInput = parseInput(filePath);
+    int capacity = bricksInput.back().value;
+    bricksInput.pop_back();
+    int bricksSize = int(bricksInput.size());
+    Brick bricks[bricksSize];
+    for (int i = 0; i < bricksSize; i++) {
+        bricks[i] = bricksInput[i];
+    }
+    return bfRecursion(bricks, bricksSize, capacity);
 }
 
-int KnapsackProblem::dpRecursion(vector<Brick> bricks, vector<vector<int>> &cache, int x, int y) {
-    if (!x || !y) {
+int KnapsackProblem::dpRecursion(Brick *bricks, int bricksSize, int capacity, int **cache) {
+    if (!bricksSize || !capacity) {
         return 0;
     }
-    if (cache[x][y] != 0) {
-        return cache[x][y];
+    if (cache[capacity][bricksSize] != 0) {
+        return cache[capacity][bricksSize];
     }
-    if (bricks[y - 1].weight > x) {
-        cache[x][y] = dpRecursion(bricks, cache, x, y - 1);
-        return cache[x][y];
+    if (bricks[bricksSize - 1].weight > capacity) {
+        cache[capacity][bricksSize] = dpRecursion(bricks, bricksSize - 1, capacity, cache);
+        return cache[capacity][bricksSize];
     }
-    cache[x][y] = max(
-        dpRecursion(bricks, cache, x, y - 1),
-        dpRecursion(bricks, cache, x - bricks[y - 1].weight, y - 1) + bricks[y - 1].value
+    cache[capacity][bricksSize] = max(
+        dpRecursion(bricks, bricksSize - 1, capacity, cache),
+        dpRecursion(bricks, bricksSize - 1, capacity - bricks[bricksSize - 1].weight, cache) + bricks[bricksSize - 1].value
     );
-    return cache[x][y];
+    return cache[capacity][bricksSize];
 }
 
 int KnapsackProblem::dynamicProgrammingRecursion(const string& filePath) {
-    vector<Brick> bricks = parseInput(filePath);
-    int capacity = bricks.back().value;
-    bricks.pop_back();
-    vector<vector<int>> cache;
-    cache.resize(capacity + 1, vector<int>(bricks.size() + 1, 0));
-    return dpRecursion(bricks, cache, capacity, int(bricks.size()));
+    vector<Brick> bricksInput = parseInput(filePath);
+    int capacity = bricksInput.back().value;
+    bricksInput.pop_back();
+    int bricksSize = int(bricksInput.size());
+    Brick bricks[bricksSize];
+    for (int i = 0; i < bricksSize; i++) {
+        bricks[i] = bricksInput[i];
+    }
+    int** cache = new int*[capacity + 1];
+    for (int i = 0; i < capacity + 1; i++) {
+        cache[i] = new int[bricksSize + 1];
+        for (int j = 0; j < bricksSize + 1; j++) {
+            cache[i][j] = 0;
+        }
+    }
+    int ans = dpRecursion(bricks, bricksSize, capacity, cache);
+    for (int i = 0; i <= capacity; i++) {
+        delete [] cache[i];
+    }
+    delete [] cache;
+    return ans;
 }
 
 int KnapsackProblem::dynamicProgramming(const string& filePath) {
-    vector<Brick> bricks = parseInput(filePath);
-    int capacity = bricks.back().value;
-    bricks.pop_back();
-    vector<vector<int>> cache;
-    cache.resize(capacity + 1, vector<int>(bricks.size() + 1, 0));
+    vector<Brick> bricksInput = parseInput(filePath);
+    int capacity = bricksInput.back().value;
+    bricksInput.pop_back();
+    int bricksSize = int(bricksInput.size());
+    Brick bricks[bricksSize];
+    for (int i = 0; i < bricksSize; i++) {
+        bricks[i] = bricksInput[i];
+    }
+    int** cache = new int*[capacity + 1];
+    for (int i = 0; i < capacity + 1; i++) {
+        cache[i] = new int[bricksSize + 1];
+    }
     for (int x = 0; x < capacity + 1; x++) {
-        for (int y = 0; y < bricks.size() + 1; y++) {
+        for (int y = 0; y < bricksSize + 1; y++) {
             if (!x || !y) {
                 cache[x][y] = 0;
             } else if (bricks[y - 1].weight > x) {
@@ -96,5 +123,10 @@ int KnapsackProblem::dynamicProgramming(const string& filePath) {
             }
         }
     }
-    return cache.back().back();
+    int ans = cache[capacity][bricksSize];
+    for (int i = 0; i < capacity + 1; i++) {
+        delete [] cache[i];
+    }
+    delete [] cache;
+    return ans;
 }

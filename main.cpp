@@ -3,6 +3,7 @@
 #include <functional>
 #include <map>
 #include <algorithm>
+#include <fstream>
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
 #include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
@@ -50,42 +51,39 @@ int main(int argc, char *argv[]) {
     };
     vector<string> multiFileList = {"StrassenAlgorithm"};
 
-    if (argc == 2) {
-        // Best method, all test cases
-        for (int i = 0; i < 11; i++) {
-            if (find(multiFileList.begin(), multiFileList.end(), (string) argv[1]) != multiFileList.end()) {
-                string path1 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "a.txt";
-                string path2 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "b.txt";
-                display(multiFileInput[(string) argv[1] + "fastest"](path1, path2));
-            } else {
-                string path = "./" + (string) argv[1] + "/tests/" + to_string(i) + ".txt";
-                display(singleFileInput[(string) argv[1] + "fastest"](path));
-            }
+    vector<double> answers;
+    ifstream ansFile("./" + (string) argv[1] + "/ans.txt");
+    string ansLine;
+    if (ansFile.is_open()) {
+        while (getline(ansFile, ansLine)) {
+            answers.push_back(stod(ansLine));
         }
-    } else if (argc == 3) {
-        // Given method, all test cases
-        for (int i = 0; i < 11; i++) {
-            if (find(multiFileList.begin(), multiFileList.end(), (string) argv[1]) != multiFileList.end()) {
-                string path1 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "a.txt";
-                string path2 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "b.txt";
-                display(multiFileInput[(string) argv[1] + (string) argv[2]](path1, path2));
-            } else {
-                string path = "./" + (string) argv[1] + "/tests/" + to_string(i) + ".txt";
-                display(singleFileInput[(string) argv[1] + (string) argv[2]](path));
-            }
+    }
+    bool multiFile = find(multiFileList.begin(), multiFileList.end(), (string) argv[1]) != multiFileList.end();
+    string method = "fastest";
+    int firstTest = 0;
+    int lastTest = 10;
+    if (argc >= 3) {
+        method = argv[2];
+        if (argc >= 4) {
+            firstTest = stoi(argv[3]);
+            lastTest = stoi(argv[3]);
         }
-    } else if (argc == 4) {
-        // Given method, given test case
-        if (find(multiFileList.begin(), multiFileList.end(), (string) argv[1]) != multiFileList.end()) {
-            string path1 = "./" + (string) argv[1] + "/tests/" + (string) argv[3] + "a.txt";
-            string path2 = "./" + (string) argv[1] + "/tests/" + (string) argv[3] + "b.txt";
-            display(multiFileInput[(string) argv[1] + (string) argv[2]](path1, path2));
+    }
+    for (int i = firstTest; i < lastTest + 1; i++) {
+        double ans;
+        if (multiFile) {
+            string path1 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "a.txt";
+            string path2 = "./" + (string) argv[1] + "/tests/" + to_string(i) + "b.txt";
+            ans = multiFileInput[(string) argv[1] + method](path1, path2);
         } else {
-            string path = "./" + (string) argv[1] + "/tests/" + (string) argv[3] + ".txt";
-            display(singleFileInput[(string) argv[1] + (string) argv[2]](path));
+            string path = "./" + (string) argv[1] + "/tests/" + to_string(i) + ".txt";
+            ans = singleFileInput[(string) argv[1] + method](path);
         }
-    } else {
-        cout << "Did not provide the correct parameters, exiting." << endl;
+        if (ans != answers[i]) {
+            cout << "WRONG ANSWER" << endl;
+        }
+        display(ans);
     }
     return 0;
 }

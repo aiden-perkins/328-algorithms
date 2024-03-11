@@ -1,9 +1,12 @@
 #include <fstream>
+#include <vector>
+#include <string>
 #include <algorithm>
 #include "DeterministicOrderSelection.h"
+
 using namespace std;
 
-vector<string> DeterministicOrderSelection::parseInput(const string& filePath) {
+vector<string> DeterministicOrderSelection::parseInput(const string &filePath) {
     ifstream file(filePath);
     string input;
     vector<string> inputVector;
@@ -68,7 +71,7 @@ int DeterministicOrderSelection::select(int* nums, int numsSize, int k) {
     return median;  // Shouldn't ever reach this, but just here to suppress the warning
 }
 
-int DeterministicOrderSelection::medianOfMedians(const string& filePath) {
+int DeterministicOrderSelection::medianOfMedians(const string &filePath) {
     vector<string> input = parseInput(filePath);
     int numsSize = int(input.size()) - 1;
     int* nums = new int[numsSize];
@@ -94,7 +97,7 @@ void DeterministicOrderSelection::quickSort(int* nums, int left, int right) {
     quickSort(nums, pivot + 1, right);
 }
 
-int DeterministicOrderSelection::bruteForce(const string& filePath) {
+int DeterministicOrderSelection::bruteForce(const string &filePath) {
     vector<string> input = parseInput(filePath);
     int numsSize = int(input.size()) - 1;
     int* nums = new int[numsSize];
@@ -127,7 +130,7 @@ int DeterministicOrderSelection::quickSelectRecursion(int* nums, int numsSize, i
     return nums[k];  // Shouldn't ever reach this, but just here to suppress the warning
 }
 
-int DeterministicOrderSelection::quickSelect(const string& filePath) {
+int DeterministicOrderSelection::quickSelect(const string &filePath) {
     vector<string> input = parseInput(filePath);
     int numsSize = int(input.size()) - 1;
     int* nums = new int[numsSize];
@@ -144,7 +147,7 @@ int DeterministicOrderSelection::quickSelect(const string& filePath) {
     return ans;
 }
 
-int DeterministicOrderSelection::builtInSort(const string& filePath) {
+int DeterministicOrderSelection::builtInSort(const string &filePath) {
     vector<string> input = parseInput(filePath);
     int numsSize = int(input.size()) - 1;
     int* nums = new int[numsSize];

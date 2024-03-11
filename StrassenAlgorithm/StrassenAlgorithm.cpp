@@ -3,9 +3,10 @@
 #include <cmath>
 #include <sstream>
 #include "StrassenAlgorithm.h"
+
 using namespace std;
 
-vector<vector<int>> StrassenAlgorithm::parseInput(const string& filePath) {
+vector<vector<int>> StrassenAlgorithm::parseInput(const string &filePath) {
     vector<vector<int>> matrix;
     ifstream file(filePath);
     string input;
@@ -100,7 +101,7 @@ vector<vector<int>> StrassenAlgorithm::runStrassen(vector<vector<int>> matrixA, 
     return result;
 }
 
-int StrassenAlgorithm::strassen(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::strassen(const string &fileAPath, const string &fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int sum = 0;
@@ -162,7 +163,7 @@ vector<vector<int>> StrassenAlgorithm::splitAndSolve(vector<vector<int>> matrixA
     return result;
 }
 
-int StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::divideAndConquer(const string &fileAPath, const string &fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int sum = 0;
@@ -174,7 +175,7 @@ int StrassenAlgorithm::divideAndConquer(const string& fileAPath, const string& f
     return sum;
 }
 
-int StrassenAlgorithm::bruteForce(const string& fileAPath, const string& fileBPath) {
+int StrassenAlgorithm::bruteForce(const string &fileAPath, const string &fileBPath) {
     vector<vector<int>> matrixA = parseInput(fileAPath);
     vector<vector<int>> matrixB = parseInput(fileBPath);
     int matrixSize = int(matrixA.size());

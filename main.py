@@ -1,5 +1,7 @@
 import argparse
 from algorithm import Algorithm
+import importlib
+import time
 
 
 def display_results(results):
@@ -26,6 +28,7 @@ if __name__ == '__main__':
         'DeterministicOrderSelection': ('built_in_sort', True, True),
         'KnapsackProblem': ('dynamic_programming', True, True),
         'MatrixChainMultiplication': ('dynamic_programming', True, True),
+        'AllPairsShortestPath': ('dijkstras', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:
@@ -70,10 +73,18 @@ if __name__ == '__main__':
         [print(a) for a in algorithms[args.list_methods].algorithm_methods]
     if args.algorithm:
         algo = algorithms[args.algorithm]
+        data_structure = None
+        if args.algorithm == 'AllPairsShortestPath' and args.method == 'floyd_warshall':
+            start = time.time()
+            print('Building data structure...')
+            apsp_pkg = importlib.import_module('AllPairsShortestPath')
+            data_structure = getattr(apsp_pkg, 'build_data_structure')(f'./AllPairsShortestPath/graph.txt')
+            total_time = time.time() - start
+            print(f'took {round(total_time, 3):<.3f} seconds.')
         tests_to_run = [args.test_case]
         start = 0 if algo.has_example else 1
         if args.test_case is None:
             tests_to_run = list(range(start, 11))
         for test_case in tests_to_run:
-            ans, total_time, test_num = algo.run_algorithm(args.method, test_case)
+            ans, total_time, test_num = algo.run_algorithm(args.method, test_case, ds=data_structure)
             print(f'{test_num}. {ans:<.3f} | took {total_time:<.3f} seconds.')

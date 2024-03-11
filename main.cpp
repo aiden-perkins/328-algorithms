@@ -4,12 +4,16 @@
 #include <map>
 #include <algorithm>
 #include <fstream>
+#include <string>
+#include <vector>
 #include "ClosestPointPair/ClosestPointPair.h"
 #include "StrassenAlgorithm/StrassenAlgorithm.h"
 #include "MaxContiguousSubsequence/MaxContiguousSubsequence.h"
 #include "DeterministicOrderSelection/DeterministicOrderSelection.h"
 #include "KnapsackProblem/KnapsackProblem.h"
 #include "MatrixChainMultiplication/MatrixChainMultiplication.h"
+#include "AllPairsShortestPath/AllPairsShortestPath.h"
+
 using namespace std;
 
 void display(double answer) {
@@ -17,7 +21,7 @@ void display(double answer) {
     cout << round(answer * 1000) / 1000 << endl;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     map<string, function<double(string)>> singleFileInput = {
         {"ClosestPointPairbrute_force", &ClosestPointPair::bruteForce},
         {"ClosestPointPairdivide_and_conquer", &ClosestPointPair::divideAndConquer},
@@ -42,6 +46,10 @@ int main(int argc, char *argv[]) {
         },
         {"MatrixChainMultiplicationdynamic_programming", &MatrixChainMultiplication::dynamicProgramming},
         {"MatrixChainMultiplicationfastest", &MatrixChainMultiplication::dynamicProgramming},
+        {"AllPairsShortestPathfastest", &AllPairsShortestPath::dijkstrasArray},
+        {"AllPairsShortestPathdijkstras_min_heap", &AllPairsShortestPath::dijkstrasMinHeap},
+        {"AllPairsShortestPathdijkstras_array", &AllPairsShortestPath::dijkstrasArray},
+        {"AllPairsShortestPathfloyd_warshall", &AllPairsShortestPath::floydWarshall},
     };
     map<string, function<double(string, string)>> multiFileInput = {
         {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},

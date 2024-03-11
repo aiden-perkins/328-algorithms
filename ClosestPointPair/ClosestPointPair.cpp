@@ -1,10 +1,10 @@
 #include <fstream>
-#include <string>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include <cmath>
 #include "ClosestPointPair.h"
+
 using namespace std;
 
 struct ClosestPointPair::Point {
@@ -12,7 +12,7 @@ struct ClosestPointPair::Point {
     double y;
 };
 
-vector<ClosestPointPair::Point> ClosestPointPair::parseInput(const string& filePath) {
+vector<ClosestPointPair::Point> ClosestPointPair::parseInput(const string &filePath) {
     vector<Point> points;
     ifstream file(filePath);
     string input;
@@ -97,13 +97,13 @@ double ClosestPointPair::splitAndSolve(vector<Point> points) {
     return newMin;
 }
 
-double ClosestPointPair::divideAndConquer(const string& filePath) {
+double ClosestPointPair::divideAndConquer(const string &filePath) {
     vector<Point> points = parseInput(filePath);
     sort(points.begin(), points.end(), sortX);
     return splitAndSolve(points);
 }
 
-double ClosestPointPair::bruteForce(const string& filePath) {
+double ClosestPointPair::bruteForce(const string &filePath) {
     vector<Point> points = parseInput(filePath);
     sort(points.begin(), points.end(), sortX);
     double bruteForceMin = sqrt(

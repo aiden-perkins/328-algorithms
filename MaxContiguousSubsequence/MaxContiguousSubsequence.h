@@ -1,5 +1,3 @@
-#include <string>
-#include <vector>
 using namespace std;
 
 #ifndef ALGORITHMS_MAXCONTIGUOUSSUBSEQUENCE_H

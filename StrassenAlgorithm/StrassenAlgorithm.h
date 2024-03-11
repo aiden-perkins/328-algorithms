@@ -1,4 +1,3 @@
-#include <string>
 using namespace std;
 
 #ifndef ALGORITHMS_STRASSENALGORITHM_H

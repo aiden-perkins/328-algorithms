@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "KnapsackProblem.h"
+
 using namespace std;
 
 struct KnapsackProblem::Brick {
@@ -9,7 +10,7 @@ struct KnapsackProblem::Brick {
     int weight;
 };
 
-vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string& filePath) {
+vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string &filePath) {
     ifstream file(filePath);
     string input;
     vector<Brick> bricks;
@@ -32,7 +33,7 @@ vector<KnapsackProblem::Brick> KnapsackProblem::parseInput(const string& filePat
     return bricks;
 }
 
-int KnapsackProblem::bfRecursion(Brick *bricks, int bricksSize, int capacity) {
+int KnapsackProblem::bfRecursion(Brick* bricks, int bricksSize, int capacity) {
     if (!bricksSize || !capacity) {
         return 0;
     }
@@ -45,7 +46,7 @@ int KnapsackProblem::bfRecursion(Brick *bricks, int bricksSize, int capacity) {
     );
 }
 
-int KnapsackProblem::bruteForce(const string& filePath) {
+int KnapsackProblem::bruteForce(const string &filePath) {
     vector<Brick> bricksInput = parseInput(filePath);
     int capacity = bricksInput.back().value;
     bricksInput.pop_back();
@@ -57,7 +58,7 @@ int KnapsackProblem::bruteForce(const string& filePath) {
     return bfRecursion(bricks, bricksSize, capacity);
 }
 
-int KnapsackProblem::dpRecursion(Brick *bricks, int bricksSize, int capacity, int **cache) {
+int KnapsackProblem::dpRecursion(Brick* bricks, int bricksSize, int capacity, int** cache) {
     if (!bricksSize || !capacity) {
         return 0;
     }
@@ -75,7 +76,7 @@ int KnapsackProblem::dpRecursion(Brick *bricks, int bricksSize, int capacity, in
     return cache[capacity][bricksSize];
 }
 
-int KnapsackProblem::dynamicProgrammingRecursion(const string& filePath) {
+int KnapsackProblem::dynamicProgrammingRecursion(const string &filePath) {
     vector<Brick> bricksInput = parseInput(filePath);
     int capacity = bricksInput.back().value;
     bricksInput.pop_back();
@@ -99,7 +100,7 @@ int KnapsackProblem::dynamicProgrammingRecursion(const string& filePath) {
     return ans;
 }
 
-int KnapsackProblem::dynamicProgramming(const string& filePath) {
+int KnapsackProblem::dynamicProgramming(const string &filePath) {
     vector<Brick> bricksInput = parseInput(filePath);
     int capacity = bricksInput.back().value;
     bricksInput.pop_back();

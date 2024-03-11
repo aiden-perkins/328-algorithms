@@ -4,9 +4,10 @@
 #include <numeric>
 #include <algorithm>
 #include "MaxContiguousSubsequence.h"
+
 using namespace std;
 
-vector<int> MaxContiguousSubsequence::parseInput(const string& filePath) {
+vector<int> MaxContiguousSubsequence::parseInput(const string &filePath) {
     vector<int> nums;
     ifstream file(filePath);
     string input;
@@ -19,7 +20,7 @@ vector<int> MaxContiguousSubsequence::parseInput(const string& filePath) {
     return nums;
 }
 
-int MaxContiguousSubsequence::kadane(const string& filePath) {
+int MaxContiguousSubsequence::kadane(const string &filePath) {
     vector<int> nums = parseInput(filePath);
     int currentSum = 0;
     int maxContigSubseq = nums[0];
@@ -63,12 +64,12 @@ int MaxContiguousSubsequence::solveMiddle(vector<int> nums, int middle) {
     return max(max(leftMaxSubseq, rightMaxSubseq), leftMaxSubseq + rightMaxSubseq - nums[middle]);
 }
 
-int MaxContiguousSubsequence::divideAndConquer(const string& filePath) {
+int MaxContiguousSubsequence::divideAndConquer(const string &filePath) {
     vector<int> nums = parseInput(filePath);
     return splitAndSolve(nums);
 }
 
-int MaxContiguousSubsequence::bruteForce(const string& filePath) {
+int MaxContiguousSubsequence::bruteForce(const string &filePath) {
     vector<int> nums = parseInput(filePath);
     int maxContigSubseq = 0;
     int numsSize = int(nums.size());

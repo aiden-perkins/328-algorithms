@@ -17,4 +17,6 @@ add_executable(algorithms
         KnapsackProblem/KnapsackProblem.h
         MatrixChainMultiplication/MatrixChainMultiplication.cpp
         MatrixChainMultiplication/MatrixChainMultiplication.h
+        AllPairsShortestPath/AllPairsShortestPath.cpp
+        AllPairsShortestPath/AllPairsShortestPath.h
 )

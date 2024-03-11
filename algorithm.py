@@ -12,16 +12,17 @@ class Algorithm:
         self.fastest = fastest
         self.algorithm = algorithm
 
-    def run_algorithm(self, method, test_case):
+    def run_algorithm(self, method, test_case, ds=None):
         if not method or method == 'fastest':
             method = self.fastest
         start = time.time()
         if self.sfi:
-            ans = getattr(self.algorithm_pkg, method)(f'./{self.algorithm}/tests/{test_case}.txt')
+            args = (f'./{self.algorithm}/tests/{test_case}.txt', )
+            if ds:
+                args = (f'./{self.algorithm}/tests/{test_case}.txt', ds)
         else:
-            file_a_path = f'./{self.algorithm}/tests/{test_case}a.txt'
-            file_b_path = f'./{self.algorithm}/tests/{test_case}b.txt'
-            ans = getattr(self.algorithm_pkg, method)(file_a_path, file_b_path)
+            args = (f'./{self.algorithm}/tests/{test_case}a.txt', f'./{self.algorithm}/tests/{test_case}b.txt')
+        ans = getattr(self.algorithm_pkg, method)(*args)
         if round(ans, 3) != self.answers[test_case]:
             print('WRONG ANSWER')
         total_time = time.time() - start

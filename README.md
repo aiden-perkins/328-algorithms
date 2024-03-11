@@ -35,7 +35,17 @@ Would run the fastest implementation of ClosestPointPair on test case 10.
 
 ### Running the Algorithms (c++)
 
-* Cmake requirements are in [CMakeLists.txt](CMakeLists.txt)
+First, make the cmake cache with (you can add a directory so everything gets put in one folder):
+
+```bash
+cmake -DCMAKE_BUILD_TYPE=Release
+```
+
+Then you can build the algorithms executable (if you added a directory above then you need to put it after `--build ` in this command):
+
+```bash
+cmake --build --target algorithms
+```
 
 Once it is compiled, just run it from in the root directory following these arguments:
 
@@ -60,7 +70,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       |       |        |     |
+| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       |       | ✓      | ✓   |
 | MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |       |        |     |
 | HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |       |        |     |
 
@@ -115,10 +125,12 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | MatrixChainMultiplication - c++ - brute force                      | 0 | 0 | 0 | 0 | 8.757   | DNF   | DNF      | DNF     | DNF     | DNF      | DNF             |
 | MatrixChainMultiplication - c++ - dynamic programming recursion    | 0 | 0 | 0 | 0 | 0       | 0     | 0        | 0       | 0       | 0        | 0               |
 | MatrixChainMultiplication - c++ - dynamic programming              | 0 | 0 | 0 | 0 | 0       | 0     | 0        | 0       | 0       | 0        | 0               |
-| AllPairsShortestPath - python - brute force                        |   |   |   |   |         |       |          |         |         |          |                 |
-| AllPairsShortestPath - python -                                    |   |   |   |   |         |       |          |         |         |          |                 |
-| AllPairsShortestPath - c++ - brute force                           |   |   |   |   |         |       |          |         |         |          |                 |
-| AllPairsShortestPath - c++ -                                       |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - python - dijkstras min heap                 |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - python - dijkstras array                    |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - python - floyd warshall                     |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - c++ - dijkstras min heap                    |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - c++ - dijkstras array                       |   |   |   |   |         |       |          |         |         |          |                 |
+| AllPairsShortestPath - c++ - floyd warshall                        |   |   |   |   |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - python - brute force                        |   |   |   |   |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - python -                                    |   |   |   |   |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - c++ - brute force                           |   |   |   |   |         |       |          |         |         |          |                 |

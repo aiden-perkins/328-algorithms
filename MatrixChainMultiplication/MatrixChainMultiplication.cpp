@@ -2,7 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <vector>
 #include "MatrixChainMultiplication.h"
+
 using namespace std;
 
 struct MatrixChainMultiplication::MatrixSize {
@@ -10,7 +12,7 @@ struct MatrixChainMultiplication::MatrixSize {
     int y;
 };
 
-vector<MatrixChainMultiplication::MatrixSize> MatrixChainMultiplication::parseInput(const string& filePath) {
+vector<MatrixChainMultiplication::MatrixSize> MatrixChainMultiplication::parseInput(const string &filePath) {
     vector<MatrixSize> matrices;
     ifstream file(filePath);
     string input;
@@ -46,7 +48,7 @@ int MatrixChainMultiplication::bfRecursion(MatrixSize* matrices, int i, int j) {
     return min;
 }
 
-int MatrixChainMultiplication::bruteForce(const string& filePath) {
+int MatrixChainMultiplication::bruteForce(const string &filePath) {
     vector<MatrixSize> matricesInput = parseInput(filePath);
     int matricesSize = int(matricesInput.size());
     MatrixSize matrices[matricesSize];
@@ -56,7 +58,7 @@ int MatrixChainMultiplication::bruteForce(const string& filePath) {
     return bfRecursion(matrices, 0, matricesSize - 1);
 }
 
-int MatrixChainMultiplication::dpRecursion(MatrixSize *matrices, int i, int j, int **cache) {
+int MatrixChainMultiplication::dpRecursion(MatrixSize* matrices, int i, int j, int** cache) {
     if (i == j) {
         return 0;
     }
@@ -73,7 +75,7 @@ int MatrixChainMultiplication::dpRecursion(MatrixSize *matrices, int i, int j, i
     return cache[i][j];
 }
 
-int MatrixChainMultiplication::dynamicProgrammingRecursion(const string& filePath) {
+int MatrixChainMultiplication::dynamicProgrammingRecursion(const string &filePath) {
     vector<MatrixSize> matricesInput = parseInput(filePath);
     int matricesSize = int(matricesInput.size());
     MatrixSize matrices[matricesSize];
@@ -95,7 +97,7 @@ int MatrixChainMultiplication::dynamicProgrammingRecursion(const string& filePat
     return ans;
 }
 
-int MatrixChainMultiplication::dynamicProgramming(const string& filePath) {
+int MatrixChainMultiplication::dynamicProgramming(const string &filePath) {
     vector<MatrixSize> matricesInput = parseInput(filePath);
     int matricesSize = int(matricesInput.size());
     MatrixSize matrices[matricesSize];

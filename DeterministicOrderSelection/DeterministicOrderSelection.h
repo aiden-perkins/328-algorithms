@@ -1,5 +1,3 @@
-#include <vector>
-#include <string>
 using namespace std;
 
 #ifndef ALGORITHMS_DETERMINISTICORDERSELECTION_H

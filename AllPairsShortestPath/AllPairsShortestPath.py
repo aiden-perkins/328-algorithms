@@ -68,7 +68,6 @@ def build_data_structure(file_path):
         adj_matrix[edge[0] - 1][edge[0] - 1] = 0
         adj_matrix[edge[1] - 1][edge[1] - 1] = 0
     for i in range(vertex_count):
-        print(i)
         for j in range(vertex_count):
             for k in range(j + 1, vertex_count):
                 possible = adj_matrix[j][i] + adj_matrix[i][k]

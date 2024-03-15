@@ -28,7 +28,8 @@ if __name__ == '__main__':
         'DeterministicOrderSelection': ('built_in_sort', True, True),
         'KnapsackProblem': ('dynamic_programming', True, True),
         'MatrixChainMultiplication': ('dynamic_programming', True, True),
-        'AllPairsShortestPath': ('dijkstras', True, True),
+        'AllPairsShortestPath': ('dijkstras_array', True, True),
+        'MinimumSpanningTrees': ('prim', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:

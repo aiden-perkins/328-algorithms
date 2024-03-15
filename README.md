@@ -75,8 +75,8 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       |       | ✓      | ✓   |
-| MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         |              | ✓          | ✓       |       |        |     |
+| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
+| MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       |        |     |
 | HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |       |        |     |
 
 ### Runtime
@@ -136,10 +136,10 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | AllPairsShortestPath - c++ - dijkstras min heap                    | 0.093  | 0.093 | 0.093 | 0.093 | 0.093   | 0.093 | 0.093    | 0.093   | 0.093   | 0.093    | 0.093           |
 | AllPairsShortestPath - c++ - dijkstras array                       | 0.038  | 0.038 | 0.038 | 0.038 | 0.038   | 0.038 | 0.038    | 0.038   | 0.038   | 0.038    | 0.038           |
 | AllPairsShortestPath - c++ - floyd warshall                        | 0.293  | ~     | ~     | ~     | ~       | ~     | ~        | ~       | ~       | ~        | ~               |
-| MinimumSpanningTrees - python - brute force                        |        |       |       |       |         |       |          |         |         |          |                 |
-| MinimumSpanningTrees - python -                                    |        |       |       |       |         |       |          |         |         |          |                 |
-| MinimumSpanningTrees - c++ - brute force                           |        |       |       |       |         |       |          |         |         |          |                 |
-| MinimumSpanningTrees - c++ -                                       |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - python - prim                               |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - python - kruskal                            |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - c++ - prim                                  |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - c++ - kruskal                               |        |       |       |       |         |       |          |         |         |          |                 |
 | HuffmanEncoding - python - brute force                             |        |       |       |       |         |       |          |         |         |          |                 |
 | HuffmanEncoding - python -                                         |        |       |       |       |         |       |          |         |         |          |                 |
 | HuffmanEncoding - c++ - brute force                                |        |       |       |       |         |       |          |         |         |          |                 |
@@ -147,4 +147,4 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 _DNF<sup>1</sup> - Python crashed due to recursion limits, would probably finish otherwise._
 
-_~ - Once APSP floyd warshall runs once, it has an answer to all._
+_\~ - Once APSP floyd warshall runs once, it has an answer to all._

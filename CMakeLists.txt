@@ -19,4 +19,6 @@ add_executable(algorithms
         MatrixChainMultiplication/MatrixChainMultiplication.h
         AllPairsShortestPath/AllPairsShortestPath.cpp
         AllPairsShortestPath/AllPairsShortestPath.h
+        MinimumSpanningTrees/MinimumSpanningTrees.cpp
+        MinimumSpanningTrees/MinimumSpanningTrees.h
 )

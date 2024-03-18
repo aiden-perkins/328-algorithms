@@ -23,7 +23,7 @@ class Algorithm:
         else:
             args = (f'./{self.algorithm}/tests/{test_case}a.txt', f'./{self.algorithm}/tests/{test_case}b.txt')
         ans = getattr(self.algorithm_pkg, method)(*args)
-        if round(ans, 3) != self.answers[test_case]:
+        if round(ans, 4) != self.answers[test_case]:
             print('WRONG ANSWER')
         total_time = time.time() - start
-        return round(ans, 3), round(total_time, 3), test_case
+        return round(ans, 4), round(total_time, 3), test_case

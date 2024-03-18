@@ -30,6 +30,7 @@ if __name__ == '__main__':
         'MatrixChainMultiplication': ('dynamic_programming', True, True),
         'AllPairsShortestPath': ('dijkstras_array', True, True),
         'MinimumSpanningTrees': ('prim', True, True),
+        'HuffmanEncoding': ('huffman', True, True),
     }
     algorithms = {}
     for raw_algorithm in raw_algorithms:
@@ -88,4 +89,4 @@ if __name__ == '__main__':
             tests_to_run = list(range(start, 11))
         for test_case in tests_to_run:
             ans, total_time, test_num = algo.run_algorithm(args.method, test_case, ds=data_structure)
-            print(f'{test_num}. {ans:<.3f} | took {total_time:<.3f} seconds.')
+            print(f'{test_num}. {ans:<.4f} | took {total_time:<.3f} seconds.')

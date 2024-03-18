@@ -21,4 +21,6 @@ add_executable(algorithms
         AllPairsShortestPath/AllPairsShortestPath.h
         MinimumSpanningTrees/MinimumSpanningTrees.cpp
         MinimumSpanningTrees/MinimumSpanningTrees.h
+        HuffmanEncoding/HuffmanEncoding.cpp
+        HuffmanEncoding/HuffmanEncoding.h
 )

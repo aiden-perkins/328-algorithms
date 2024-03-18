@@ -60,12 +60,12 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 ### Todo
 
-* Switch from vectors in the following c++ algorithms:
+* Switch from vectors to arrays in the following c++ algorithms:
   * ClosestPointPair
   * StrassenAlgorithm
   * MaxContiguousSubsequence
-* Switch from pair to struct in AllPairsShortestPath.
-* Find out how to parse APSP better, it's the only reason dijkstras isn't 0.
+* Switch from pair to struct in AllPairsShortestPath c++.
+* Find out how to parse APSP better, it's the only reason dijkstras isn't 0 (both c++ & python).
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Timed | Python | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------|:-------|:----|
@@ -75,9 +75,9 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| AllPairsShortestPath        | Shortest path to all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| MinimumSpanningTrees        |                                           | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       |        |     |
-| HuffmanEncoding             |                                           | Greedy: Huffman coding             |              | ✓          | no ans  |       |        |     |
+| AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
+| MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      |     |
+| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       |       | ✓      |     |
 
 ### Runtime
 
@@ -140,10 +140,8 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | MinimumSpanningTrees - python - kruskal                            |        |       |       |       |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - c++ - prim                                  |        |       |       |       |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - c++ - kruskal                               |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - python - brute force                             |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - python -                                         |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - c++ - brute force                                |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - c++ -                                            |        |       |       |       |         |       |          |         |         |          |                 |
+| HuffmanEncoding - python - huffman                                 |        |       |       |       |         |       |          |         |         |          |                 |
+| HuffmanEncoding - c++ - huffman                                    |        |       |       |       |         |       |          |         |         |          |                 |
 
 _DNF<sup>1</sup> - Python crashed due to recursion limits, would probably finish otherwise._
 

@@ -13,6 +13,8 @@
 #include "KnapsackProblem/KnapsackProblem.h"
 #include "MatrixChainMultiplication/MatrixChainMultiplication.h"
 #include "AllPairsShortestPath/AllPairsShortestPath.h"
+#include "MinimumSpanningTrees/MinimumSpanningTrees.h"
+#include "HuffmanEncoding/HuffmanEncoding.h"
 
 using namespace std;
 
@@ -50,6 +52,11 @@ int main(int argc, char* argv[]) {
         {"AllPairsShortestPathdijkstras_min_heap", &AllPairsShortestPath::dijkstrasMinHeap},
         {"AllPairsShortestPathdijkstras_array", &AllPairsShortestPath::dijkstrasArray},
         {"AllPairsShortestPathfloyd_warshall", &AllPairsShortestPath::floydWarshall},
+        {"MinimumSpanningTreesfastest", &MinimumSpanningTrees::prim},
+        {"MinimumSpanningTreesprim", &MinimumSpanningTrees::prim},
+        {"MinimumSpanningTreeskruskal", &MinimumSpanningTrees::kruskal},
+        {"HuffmanEncodingfastest", &HuffmanEncoding::huffman},
+        {"HuffmanEncodinghuffman", &HuffmanEncoding::huffman},
     };
     map<string, function<double(string, string)>> multiFileInput = {
         {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},

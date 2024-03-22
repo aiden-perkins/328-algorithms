@@ -77,7 +77,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      |     |
-| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       |       | ✓      |     |
+| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       |       | ✓      | ✓   |
 
 ### Runtime
 

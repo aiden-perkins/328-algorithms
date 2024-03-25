@@ -66,6 +66,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
   * MaxContiguousSubsequence
 * Switch from pair to struct in AllPairsShortestPath c++.
 * Find out how to parse APSP better, it's the only reason dijkstras isn't 0 (both c++ & python).
+* Experiment with seekg in c++ parsing, see if it's faster than vectors and if not then make huffman use vector parsing.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Timed | Python | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------|:-------|:----|
@@ -77,7 +78,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      |     |
-| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       |       | ✓      | ✓   |
+| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 
 ### Runtime
 
@@ -136,12 +137,12 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | AllPairsShortestPath - c++ - dijkstras min heap                    | 0.093  | 0.093 | 0.093 | 0.093 | 0.093   | 0.093 | 0.093    | 0.093   | 0.093   | 0.093    | 0.093           |
 | AllPairsShortestPath - c++ - dijkstras array                       | 0.038  | 0.038 | 0.038 | 0.038 | 0.038   | 0.038 | 0.038    | 0.038   | 0.038   | 0.038    | 0.038           |
 | AllPairsShortestPath - c++ - floyd warshall                        | 0.293  | ~     | ~     | ~     | ~       | ~     | ~        | ~       | ~       | ~        | ~               |
-| MinimumSpanningTrees - python - prim                               |        |       |       |       |         |       |          |         |         |          |                 |
-| MinimumSpanningTrees - python - kruskal                            |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - python - prim                               | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0.047   | 0.062    | 0.189           |
+| MinimumSpanningTrees - python - kruskal                            | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0.031   | 0.109   | 0.266    | 0.969           |
 | MinimumSpanningTrees - c++ - prim                                  |        |       |       |       |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - c++ - kruskal                               |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - python - huffman                                 |        |       |       |       |         |       |          |         |         |          |                 |
-| HuffmanEncoding - c++ - huffman                                    |        |       |       |       |         |       |          |         |         |          |                 |
+| HuffmanEncoding - python - huffman                                 | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0       | 0        | 0               |
+| HuffmanEncoding - c++ - huffman                                    | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0       | 0        | 0               |
 
 _DNF<sup>1</sup> - Python crashed due to recursion limits, would probably finish otherwise._
 

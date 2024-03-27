@@ -5,6 +5,7 @@ using namespace std;
 
 class MinimumSpanningTrees {
     private:
+        struct Node;
         static vector<string> parseInput(const string&);
     public:
         static double prim(const string&);

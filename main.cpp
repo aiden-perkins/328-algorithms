@@ -20,7 +20,7 @@ using namespace std;
 
 void display(double answer) {
     cout << fixed;
-    cout << round(answer * 1000) / 1000 << endl;
+    cout << round(answer * 10000) / 10000 << endl;
 }
 
 int main(int argc, char* argv[]) {

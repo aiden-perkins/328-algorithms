@@ -66,7 +66,6 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
   * MaxContiguousSubsequence
 * Switch from pair to struct in AllPairsShortestPath c++.
 * Find out how to parse APSP better, it's the only reason dijkstras isn't 0 (both c++ & python).
-* Experiment with seekg in c++ parsing, see if it's faster than vectors and if not then make huffman use vector parsing.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Timed | Python | C++ |
 |:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------|:-------|:----|

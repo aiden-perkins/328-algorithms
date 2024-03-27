@@ -1,6 +1,5 @@
 #include <string>
 #include <fstream>
-#include <iostream>
 #include <functional>
 #include <algorithm>
 #include "HuffmanEncoding.h"
@@ -61,6 +60,8 @@ int HuffmanEncoding::huffman(const string &filePath) {
             if (weightNodes[i] > weightNodes[i - 1]) {
                 swap(weightNodes[i], weightNodes[i - 1]);
                 swap(strNodes[i], strNodes[i - 1]);
+            } else {
+                break;
             }
         }
     }

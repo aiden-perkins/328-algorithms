@@ -5,8 +5,9 @@ using namespace std;
 
 class AllPairsShortestPath {
     private:
-        struct compare;
-        static pair<int, int> parseInput(const string&);
+        struct Compare;
+        struct VertexPair;
+        static VertexPair parseInput(const string&);
         static vector<string> parseGraph();
     public:
         static int dijkstrasMinHeap(const string&);

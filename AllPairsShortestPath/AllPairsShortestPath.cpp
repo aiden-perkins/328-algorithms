@@ -10,21 +10,26 @@
 
 using namespace std;
 
-struct AllPairsShortestPath::compare {
+struct AllPairsShortestPath::Compare {
     bool operator() (pair<int, int> const &p1, pair<int, int> const &p2) {
         return p1.first > p2.first;
     }
 };
 
-pair<int, int> AllPairsShortestPath::parseInput(const string &filePath) {
+struct AllPairsShortestPath::VertexPair {
+    int start;
+    int end;
+};
+
+AllPairsShortestPath::VertexPair AllPairsShortestPath::parseInput(const string &filePath) {
     string input;
     ifstream file(filePath);
-    pair<int, int> ansPair;
+    VertexPair ansPair{};
     if (file.is_open()) {
         getline(file, input, ',');
-        ansPair.first = stoi(input.substr(1));
+        ansPair.start = stoi(input.substr(1));
         getline(file, input, ',');
-        ansPair.second = stoi(input.substr(1, input.size() - 2));
+        ansPair.end = stoi(input.substr(1, input.size() - 2));
     }
     return ansPair;
 }
@@ -46,7 +51,7 @@ vector<string> AllPairsShortestPath::parseGraph() {
 
 int AllPairsShortestPath::dijkstrasArray(const string &filePath) {
     vector<string> edgeStrings = parseGraph();
-    pair<int, int> ansPair = parseInput(filePath);
+    VertexPair ansPair = parseInput(filePath);
     int edgeCount = int(edgeStrings.size());
     int edges[edgeCount][3];
     set<int> vertices;
@@ -77,7 +82,7 @@ int AllPairsShortestPath::dijkstrasArray(const string &filePath) {
         adjMatrix[edges[i][0] - 1][edges[i][1] - 1] = edges[i][2];
         adjMatrix[edges[i][1] - 1][edges[i][0] - 1] = edges[i][2];
     }
-    distanceMins[ansPair.first - 1] = 0;
+    distanceMins[ansPair.start - 1] = 0;
     for (int _ = 0; _ < vertexCount; _++) {
         int currentIdx = -1;
         int nextMinDistance = INT_MAX;
@@ -100,12 +105,12 @@ int AllPairsShortestPath::dijkstrasArray(const string &filePath) {
             }
         }
     }
-    return distanceMins[ansPair.second - 1];
+    return distanceMins[ansPair.end - 1];
 }
 
 int AllPairsShortestPath::dijkstrasMinHeap(const string &filePath) {
     vector<string> edgeStrings = parseGraph();
-    pair<int, int> ansPair = parseInput(filePath);
+    VertexPair ansPair = parseInput(filePath);
     int edgeCount = int(edgeStrings.size());
     int edges[edgeCount][3];
     set<int> vertices;
@@ -123,7 +128,7 @@ int AllPairsShortestPath::dijkstrasMinHeap(const string &filePath) {
     }
     int vertexCount = int(vertices.size());
     map<pair<int, int>, int> cost;
-    int adj_list[vertexCount][vertexCount];
+    int adjList[vertexCount][vertexCount];
     int vertexNeighborCount[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
         vertexNeighborCount[i] = 0;
@@ -132,33 +137,33 @@ int AllPairsShortestPath::dijkstrasMinHeap(const string &filePath) {
         int vertex1Idx = edges[i][0] - 1;
         int vertex2Idx = edges[i][1] - 1;
         int edgeCost = edges[i][2];
-        adj_list[vertex1Idx][vertexNeighborCount[vertex1Idx]] = vertex2Idx;
+        adjList[vertex1Idx][vertexNeighborCount[vertex1Idx]] = vertex2Idx;
         vertexNeighborCount[vertex1Idx]++;
-        adj_list[vertex2Idx][vertexNeighborCount[vertex2Idx]] = vertex1Idx;
+        adjList[vertex2Idx][vertexNeighborCount[vertex2Idx]] = vertex1Idx;
         vertexNeighborCount[vertex2Idx]++;
         cost[pair<int, int>(vertex1Idx, vertex2Idx)] = edgeCost;
         cost[pair<int, int>(vertex2Idx, vertex1Idx)] = edgeCost;
     }
-    priority_queue<pair<int, int>, vector<pair<int, int>>, compare> queue;
-    queue.emplace(0, ansPair.first - 1);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> queue;
+    queue.emplace(0, ansPair.start - 1);
     map<int, int> distanceMins;
     for (int i = 0; i < vertexCount; i++) {
         distanceMins[i] = INT_MAX;
     }
-    distanceMins[ansPair.first - 1] = 0;
+    distanceMins[ansPair.start - 1] = 0;
     while (!queue.empty()) {
-        pair<int, int> current_node = queue.top();
+        pair<int, int> currentNode = queue.top();
         queue.pop();
-        for (int i = 0; i < vertexNeighborCount[current_node.second]; i++) {
-            int new_vertex = adj_list[current_node.second][i];
-            int new_cost = current_node.first + cost[pair<int, int>(current_node.second, new_vertex)];
-            if (new_cost < distanceMins[new_vertex]) {
-                distanceMins[new_vertex] = new_cost;
-                queue.emplace(new_cost, new_vertex);
+        for (int i = 0; i < vertexNeighborCount[currentNode.second]; i++) {
+            int newVertex = adjList[currentNode.second][i];
+            int newCost = currentNode.first + cost[pair<int, int>(currentNode.second, newVertex)];
+            if (newCost < distanceMins[newVertex]) {
+                distanceMins[newVertex] = newCost;
+                queue.emplace(newCost, newVertex);
             }
         }
     }
-    return distanceMins[ansPair.second - 1];
+    return distanceMins[ansPair.end - 1];
 }
 
 int AllPairsShortestPath::floydWarshall(const string &filePath) {
@@ -181,28 +186,28 @@ int AllPairsShortestPath::floydWarshall(const string &filePath) {
         totalWeight += stoi(value);
     }
     int vertexCount = int(vertices.size());
-    int adj_matrix[vertexCount][vertexCount];
+    int adjMatrix[vertexCount][vertexCount];
     for (int i = 0; i < vertexCount; i++) {
         for (int j = 0; j < vertexCount; j++) {
-            adj_matrix[i][j] = totalWeight;
+            adjMatrix[i][j] = totalWeight;
         }
-        adj_matrix[i][i] = 0;
+        adjMatrix[i][i] = 0;
     }
     for (int i = 0; i < edgeCount; i++) {
-        adj_matrix[edges[i][0] - 1][edges[i][1] - 1] = edges[i][2];
-        adj_matrix[edges[i][1] - 1][edges[i][0] - 1] = edges[i][2];
+        adjMatrix[edges[i][0] - 1][edges[i][1] - 1] = edges[i][2];
+        adjMatrix[edges[i][1] - 1][edges[i][0] - 1] = edges[i][2];
     }
     for (int i = 0; i < vertexCount; i++) {
         for (int j = 0; j < vertexCount; j++) {
             for (int k = j + 1; k < vertexCount; k++) {
-                int possible = adj_matrix[j][i] + adj_matrix[i][k];
-                if (adj_matrix[j][k] > possible) {
-                    adj_matrix[j][k] = possible;
-                    adj_matrix[k][j] = possible;
+                int possible = adjMatrix[j][i] + adjMatrix[i][k];
+                if (adjMatrix[j][k] > possible) {
+                    adjMatrix[j][k] = possible;
+                    adjMatrix[k][j] = possible;
                 }
             }
         }
     }
-    pair<int, int> ansPair = parseInput(filePath);
-    return adj_matrix[ansPair.first - 1][ansPair.second - 1];
+    VertexPair ansPair = parseInput(filePath);
+    return adjMatrix[ansPair.start - 1][ansPair.end - 1];
 }

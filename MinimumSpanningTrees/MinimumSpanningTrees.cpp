@@ -1,10 +1,17 @@
 #include <fstream>
 #include <vector>
-#include <iostream>
 #include <string>
+#include <set>
+#include <sstream>
+#include <cmath>
 #include "MinimumSpanningTrees.h"
 
 using namespace std;
+
+struct MinimumSpanningTrees::Node {
+    int vertex;
+    double weight;
+};
 
 vector<string> MinimumSpanningTrees::parseInput(const string &filePath) {
     vector<string> edgeStrings;
@@ -23,10 +30,90 @@ vector<string> MinimumSpanningTrees::parseInput(const string &filePath) {
 
 double MinimumSpanningTrees::prim(const string &filePath) {
     vector<string> edgeStrings = parseInput(filePath);
-    for (string v: edgeStrings) {
-        cout << v << endl;
+    int edgeCount = int(edgeStrings.size());
+    double edges[edgeCount][3];
+    set<double> vertices;
+    for (int i = 0; i < edgeCount; i++) {
+        string value;
+        stringstream ss(edgeStrings[i]);
+        getline(ss, value, ',');
+        double start = stod(value);
+        getline(ss, value, ',');
+        double end = stod(value);
+        getline(ss, value, ',');
+        edges[i][0] = stod(value);
+        edges[i][1] = start - 1;
+        edges[i][2] = end - 1;
+        vertices.insert(start);
+        vertices.insert(end);
     }
-    return 0;
+    int vertexCount = int(vertices.size());
+    Node** adjList = new Node*[vertexCount];
+    for (int i = 0; i < vertexCount; i++) {
+        adjList[i] = new Node[vertexCount];
+    }
+    int adjListLengths[vertexCount];
+    for (int i = 0; i < vertexCount; i++) {
+        adjListLengths[i] = 0;
+    }
+    for (int i = 0; i < edgeCount; i++) {
+        double edgeW = edges[i][0];
+        int edgeS = int(edges[i][1]);
+        int edgeE = int(edges[i][2]);
+        adjList[edgeS][adjListLengths[edgeS]] = Node{edgeE, edgeW};
+        adjListLengths[edgeS]++;
+        adjList[edgeE][adjListLengths[edgeE]] = Node{edgeS, edgeW};
+        adjListLengths[edgeE]++;
+    }
+    int visited[vertexCount];
+    for (int i = 0; i < vertexCount; i++) {
+        visited[i] = -1;
+    }
+    int visitedCount = 0;
+    Node queue[edgeCount * 2];
+    int queueIdx = 0;
+    queue[0] = Node{0, 0};
+    int queueSize = 1;
+    double totalWeight = 0;
+    while (visitedCount != vertexCount) {
+        Node current = queue[queueIdx];
+        queueIdx++;
+        bool isInVisited = false;
+        for (int i = 0; i < visitedCount; i++) {
+            if (visited[i] == current.vertex) {
+                isInVisited = true;
+            }
+        }
+        if (!isInVisited) {
+            visited[visitedCount] = current.vertex;
+            visitedCount++;
+            totalWeight += current.weight;
+            for (int i = 0; i < adjListLengths[current.vertex]; i++) {
+                Node next = adjList[current.vertex][i];
+                bool isNeighborInVisited = false;
+                for (int j = 0; j < visitedCount; j++) {
+                    if (visited[j] == next.vertex) {
+                        isNeighborInVisited = true;
+                    }
+                }
+                if (!isNeighborInVisited) {
+                    queue[queueSize] = Node{next.vertex, next.weight};
+                    for (int j = queueSize; j > queueIdx; j--) {
+                        if (queue[j].weight < queue[j - 1].weight) {
+                            Node temp = queue[j];
+                            queue[j] = queue[j - 1];
+                            queue[j - 1] = temp;
+                        } else {
+                            break;
+                        }
+                    }
+                    queueSize++;
+                }
+            }
+        }
+    }
+    delete [] adjList;
+    return round(totalWeight * 10000) / 10000;
 }
 
 double MinimumSpanningTrees::kruskal(const string &filePath) {

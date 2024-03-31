@@ -8,7 +8,8 @@ class MinimumSpanningTrees {
         struct Node;
         static vector<string> parseInput(const string&);
     public:
-        static double prim(const string&);
+        static double primMinHeap(const string&);
+        static double primArray(const string&);
         static double kruskal(const string&);
 };
 

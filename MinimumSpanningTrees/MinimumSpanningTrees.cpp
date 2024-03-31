@@ -28,7 +28,11 @@ vector<string> MinimumSpanningTrees::parseInput(const string &filePath) {
     return edgeStrings;
 }
 
-double MinimumSpanningTrees::prim(const string &filePath) {
+double MinimumSpanningTrees::primMinHeap(const string &filePath) {
+    return 0;
+}
+
+double MinimumSpanningTrees::primArray(const string &filePath) {
     vector<string> edgeStrings = parseInput(filePath);
     int edgeCount = int(edgeStrings.size());
     double edges[edgeCount][3];
@@ -65,9 +69,9 @@ double MinimumSpanningTrees::prim(const string &filePath) {
         adjList[edgeE][adjListLengths[edgeE]] = Node{edgeS, edgeW};
         adjListLengths[edgeE]++;
     }
-    int visited[vertexCount];
+    bool visited[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
-        visited[i] = -1;
+        visited[i] = false;
     }
     int visitedCount = 0;
     Node queue[edgeCount * 2];
@@ -78,26 +82,15 @@ double MinimumSpanningTrees::prim(const string &filePath) {
     while (visitedCount != vertexCount) {
         Node current = queue[queueIdx];
         queueIdx++;
-        bool isInVisited = false;
-        for (int i = 0; i < visitedCount; i++) {
-            if (visited[i] == current.vertex) {
-                isInVisited = true;
-            }
-        }
-        if (!isInVisited) {
-            visited[visitedCount] = current.vertex;
+        if (!visited[current.vertex]) {
+            visited[current.vertex] = true;
             visitedCount++;
             totalWeight += current.weight;
+            Node* nextVertices = adjList[current.vertex];
             for (int i = 0; i < adjListLengths[current.vertex]; i++) {
-                Node next = adjList[current.vertex][i];
-                bool isNeighborInVisited = false;
-                for (int j = 0; j < visitedCount; j++) {
-                    if (visited[j] == next.vertex) {
-                        isNeighborInVisited = true;
-                    }
-                }
-                if (!isNeighborInVisited) {
-                    queue[queueSize] = Node{next.vertex, next.weight};
+                Node next = nextVertices[i];
+                if (!visited[next.vertex]) {
+                    queue[queueSize] = next;
                     for (int j = queueSize; j > queueIdx; j--) {
                         if (queue[j].weight < queue[j - 1].weight) {
                             Node temp = queue[j];

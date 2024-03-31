@@ -6,6 +6,9 @@ using namespace std;
 class MinimumSpanningTrees {
     private:
         struct Node;
+        struct Edge;
+        static int kFind(int*, int);
+        static void kUnion(int*, int*, int, int);
         static vector<string> parseInput(const string&);
     public:
         static double primMinHeap(const string&);

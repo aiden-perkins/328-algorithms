@@ -2,6 +2,22 @@ import heapq
 from collections import defaultdict
 
 
+def k_find(parent, x):
+    if parent[x] != x:
+        parent[x] = k_find(parent, parent[x])
+    return parent[x]
+
+
+def k_union(rank, parent, x, y):
+    px, py = k_find(parent, x), k_find(parent, y)
+    if rank[px] < rank[py]:
+        parent[px] = py
+    else:
+        parent[py] = px
+        if rank[px] == rank[py]:
+            rank[px] += 1
+
+
 def kruskal(file_path):
     raw_edges = open(file_path).read()[2:-2].split('}, {')
     edges = []
@@ -11,50 +27,14 @@ def kruskal(file_path):
         edges.append((float(weight), int(start) - 1, int(end) - 1))
         vertices.add(start)
         vertices.add(end)
-    edge_count = len(vertices)
-    edges.sort()
-    tree = []
-    tree_vertices = set()
-    total_cost = 0
-    while len(tree_vertices) < edge_count or len(tree) > 1:
-        for i, (weight, start, end) in enumerate(edges):
-            for small_tree in tree:
-                if len(small_tree.intersection({start, end})) == 2:
-                    break
-            else:
-                tree_vertices.add(start)
-                tree_vertices.add(end)
-                total_cost += weight
-                del edges[i]
-                prev_tree_start = False
-                prev_tree_start_idx = None
-                prev_tree_end = False
-                prev_tree_end_idx = None
-                for j, small_tree in enumerate(tree):
-                    if start in small_tree:
-                        prev_tree_start = True
-                        prev_tree_start_idx = j
-                    if end in small_tree:
-                        prev_tree_end = True
-                        prev_tree_end_idx = j
-                if prev_tree_end and prev_tree_start:
-                    old_start = tree[prev_tree_start_idx]
-                    old_end = tree[prev_tree_end_idx]
-                    tree.append(old_start.union(old_end))
-                    if prev_tree_start_idx > prev_tree_end_idx:
-                        del tree[prev_tree_start_idx]
-                        del tree[prev_tree_end_idx]
-                    else:
-                        del tree[prev_tree_end_idx]
-                        del tree[prev_tree_start_idx]
-                elif not prev_tree_end and not prev_tree_start:
-                    tree.append({start, end})
-                elif prev_tree_end:
-                    tree[prev_tree_end_idx].add(start)
-                else:
-                    tree[prev_tree_start_idx].add(end)
-                break
-    return total_cost
+    parent = list(range(len(vertices)))
+    rank = [0] * len(vertices)
+    total_weight = 0
+    for weight, start, end in sorted(edges):
+        if k_find(parent, start) != k_find(parent, end):
+            k_union(rank, parent, start, end)
+            total_weight += weight
+    return total_weight
 
 
 def prim(file_path):

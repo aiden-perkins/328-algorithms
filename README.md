@@ -76,7 +76,7 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 | AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      |     |
+| MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      | ✓   |
 | HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
 
 ### Runtime

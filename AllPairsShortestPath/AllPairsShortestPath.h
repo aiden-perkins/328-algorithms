@@ -5,7 +5,7 @@ using namespace std;
 
 class AllPairsShortestPath {
     private:
-        struct Compare;
+        struct Edge;
         struct VertexPair;
         static VertexPair parseInput(const string&);
         static vector<string> parseGraph();

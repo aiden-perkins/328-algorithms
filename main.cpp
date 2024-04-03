@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
     };
     map<string, function<double(string, string)>> multiFileInput = {
         {"StrassenAlgorithmbrute_force", &StrassenAlgorithm::bruteForce},
-        {"StrassenAlgorithmstrassen_array", &StrassenAlgorithm::strassenV2},
+        {"StrassenAlgorithmstrassen", &StrassenAlgorithm::strassen},
         {"StrassenAlgorithmfastest", &StrassenAlgorithm::strassen},
         {"StrassenAlgorithmdivide_and_conquer", &StrassenAlgorithm::divideAndConquer},
     };

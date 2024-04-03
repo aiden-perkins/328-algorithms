@@ -62,22 +62,21 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 * Switch from vectors to arrays in the following c++ algorithms:
   * ClosestPointPair
-  * StrassenAlgorithm
   * MaxContiguousSubsequence
 * Switch from pair to struct in AllPairsShortestPath c++.
 * Find out how to parse APSP better, it's the only reason dijkstras isn't 0 (both c++ & python).
 
-| Algorithm                   | Problem                                   | Lecture Name                       | Instructions | Test Cases | Example | Timed | Python | C++ |
-|:----------------------------|:------------------------------------------|:-----------------------------------|:-------------|:-----------|:--------|:------|:-------|:----|
-| ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
-| MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓            | ✓          | ✓       |       | ✓      | ✓   |
-| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓            | ✓          | ✓       | ✓     | ✓      | ✓   |
+| Algorithm                   | Problem                                   | Lecture Name                       | Cleared | Timed | 
+|:----------------------------|:------------------------------------------|:-----------------------------------|:--------|:------|
+| ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          |         |       | 
+| StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓       |       | 
+| MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      |         |       | 
+| DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓       | ✓     | 
+| KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓       | ✓     | 
+| MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓       | ✓     | 
+| AllPairsShortestPath        | Shortest path of all pairs in a graph     | DP: APSP                           | ✓       |       | 
+| MinimumSpanningTrees        | Minimum spanning tree of a graph          | Greedy: MST (Kruskal/Prim)         | ✓       |       | 
+| HuffmanEncoding             | String compression                        | Greedy: Huffman coding             | ✓       | ✓     | 
 
 ### Runtime
 
@@ -138,7 +137,8 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 | AllPairsShortestPath - c++ - floyd warshall                        | 0.293  | ~     | ~     | ~     | ~       | ~     | ~        | ~       | ~       | ~        | ~               |
 | MinimumSpanningTrees - python - prim                               | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0.047   | 0.062    | 0.189           |
 | MinimumSpanningTrees - python - kruskal                            | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0.031   | 0.109   | 0.266    | 0.969           |
-| MinimumSpanningTrees - c++ - prim                                  |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - c++ - prim min heap                         |        |       |       |       |         |       |          |         |         |          |                 |
+| MinimumSpanningTrees - c++ - prim array                            |        |       |       |       |         |       |          |         |         |          |                 |
 | MinimumSpanningTrees - c++ - kruskal                               |        |       |       |       |         |       |          |         |         |          |                 |
 | HuffmanEncoding - python - huffman                                 | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0       | 0        | 0               |
 | HuffmanEncoding - c++ - huffman                                    | 0      | 0     | 0     | 0     | 0       | 0     | 0        | 0       | 0       | 0        | 0               |

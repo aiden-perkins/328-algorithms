@@ -10,15 +10,25 @@
 
 using namespace std;
 
-struct AllPairsShortestPath::Compare {
-    bool operator() (pair<int, int> const &p1, pair<int, int> const &p2) {
-        return p1.first > p2.first;
-    }
-};
-
 struct AllPairsShortestPath::VertexPair {
     int start;
     int end;
+
+    bool operator<(VertexPair const &other) const {
+        if (start == other.start) {
+            return end < other.end;
+        }
+        return start < other.start;
+    }
+};
+
+struct AllPairsShortestPath::Edge {
+    int cost;
+    int vertex;
+
+    bool operator<(Edge const &other) const {
+        return cost > other.cost;
+    }
 };
 
 AllPairsShortestPath::VertexPair AllPairsShortestPath::parseInput(const string &filePath) {
@@ -127,7 +137,7 @@ int AllPairsShortestPath::dijkstrasMinHeap(const string &filePath) {
         edges[i][2] = stoi(value);
     }
     int vertexCount = int(vertices.size());
-    map<pair<int, int>, int> cost;
+    map<VertexPair, int> cost;
     int adjList[vertexCount][vertexCount];
     int vertexNeighborCount[vertexCount];
     for (int i = 0; i < vertexCount; i++) {
@@ -141,25 +151,25 @@ int AllPairsShortestPath::dijkstrasMinHeap(const string &filePath) {
         vertexNeighborCount[vertex1Idx]++;
         adjList[vertex2Idx][vertexNeighborCount[vertex2Idx]] = vertex1Idx;
         vertexNeighborCount[vertex2Idx]++;
-        cost[pair<int, int>(vertex1Idx, vertex2Idx)] = edgeCost;
-        cost[pair<int, int>(vertex2Idx, vertex1Idx)] = edgeCost;
+        cost[VertexPair{vertex1Idx, vertex2Idx}] = edgeCost;
+        cost[VertexPair{vertex2Idx, vertex1Idx}] = edgeCost;
     }
-    priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> queue;
-    queue.emplace(0, ansPair.start - 1);
+    priority_queue<Edge, vector<Edge>> queue;
+    queue.push(Edge{0, ansPair.start - 1});
     map<int, int> distanceMins;
     for (int i = 0; i < vertexCount; i++) {
         distanceMins[i] = INT_MAX;
     }
     distanceMins[ansPair.start - 1] = 0;
     while (!queue.empty()) {
-        pair<int, int> currentNode = queue.top();
+        Edge currentNode = queue.top();
         queue.pop();
-        for (int i = 0; i < vertexNeighborCount[currentNode.second]; i++) {
-            int newVertex = adjList[currentNode.second][i];
-            int newCost = currentNode.first + cost[pair<int, int>(currentNode.second, newVertex)];
+        for (int i = 0; i < vertexNeighborCount[currentNode.vertex]; i++) {
+            int newVertex = adjList[currentNode.vertex][i];
+            int newCost = currentNode.cost + cost[VertexPair{currentNode.vertex, newVertex}];
             if (newCost < distanceMins[newVertex]) {
                 distanceMins[newVertex] = newCost;
-                queue.emplace(newCost, newVertex);
+                queue.push(Edge{newCost, newVertex});
             }
         }
     }

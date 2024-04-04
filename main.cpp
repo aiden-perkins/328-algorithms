@@ -67,6 +67,20 @@ int main(int argc, char* argv[]) {
     };
     vector<string> multiFileList = {"StrassenAlgorithm"};
 
+    if ((string) argv[1] == "strassen_sub_one_second") {
+        cout << "One second strassen is in progress" << endl;
+        return 0;
+    } else if ((string) argv[1] == "time") {
+        // Check if there is a specific algorithm in the arguments
+        // Check if there is a specific method in the arguments
+        // Check if there is a specific test case in the arguments
+        // Run the algorithm with the specific method on the specific test case either 1000 times or for 1 hour whatever
+        // happens first.
+        // This should eventually replace the rest of the code, so you shouldn't need to put 'test' as an argument but
+        // as it's a WIP for now right here is fine.
+        cout << "Time is in progress" << endl;
+        return 0;
+    }
     vector<double> answers;
     ifstream ansFile("./" + (string) argv[1] + "/ans.txt");
     string ansLine;

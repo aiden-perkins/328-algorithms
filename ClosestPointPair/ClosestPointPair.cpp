@@ -107,13 +107,15 @@ double ClosestPointPair::divideAndConquer(const string &filePath) {
     auto* points = new Point[pointsCount];
     populatePoints(points, pointsCount, rawPoints);
     sort(points, points + pointsCount, sortX);
-    return round(splitAndSolve(points, pointsCount) * 1000) / 1000;
+    double ans = round(splitAndSolve(points, pointsCount) * 1000) / 1000;
+    delete [] points;
+    return ans;
 }
 
 double ClosestPointPair::bruteForce(const string &filePath) {
     vector<string> rawPoints = parseInput(filePath);
     int pointsCount = int(rawPoints.size());
-    Point points[pointsCount];
+    auto* points = new Point[pointsCount];
     populatePoints(points, pointsCount, rawPoints);
     double bruteForceMin = sqrt(
         pow(points[0].x - points[1].x, 2) + pow(points[0].y - points[1].y, 2)
@@ -129,5 +131,6 @@ double ClosestPointPair::bruteForce(const string &filePath) {
             }
         }
     }
+    delete [] points;
     return round(bruteForceMin * 1000) / 1000;
 }

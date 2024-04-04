@@ -35,7 +35,7 @@ def divide_and_conquer(file_path):
         [[float(i) for i in a.split(', ')] for a in open(file_path).read()[2:-2].split('}, {')],
         key=lambda c: c[0]
     )
-    return split_and_solve(points)
+    return round(split_and_solve(points), 3)
 
 
 def brute_force(file_path):

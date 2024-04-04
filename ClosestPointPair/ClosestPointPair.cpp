@@ -10,50 +10,53 @@ using namespace std;
 struct ClosestPointPair::Point {
     double x;
     double y;
-};
 
-vector<ClosestPointPair::Point> ClosestPointPair::parseInput(const string &filePath) {
-    vector<Point> points;
-    ifstream file(filePath);
-    string input;
-    if (file.is_open()) {
-        while (getline(file, input, '}')) {
-            if (input.length() > 3) {
-                if (input.find("{{") != string::npos) {
-                    input = input.substr(2);
-                } else {
-                    input = input.substr(3);
-                }
-                Point point{};
-                string part;
-                istringstream iss(input);
-                getline(iss, part, ',');
-                point.x = stod(part);
-                getline(iss, part, ',');
-                point.y = stod(part.substr(1));
-                points.push_back(point);
-            }
-        }
-        file.close();
+    bool operator<(Point const &other) const {
+        return y < other.y;
     }
-    return points;
-}
+};
 
 bool ClosestPointPair::sortX(const Point &a, const Point &b) {
     return a.x < b.x;
 }
 
-bool ClosestPointPair::sortY(const Point &a, const Point &b) {
-    return a.y < b.y;
+vector<string> ClosestPointPair::parseInput(const string &filePath) {
+    vector<string> rawPoints;
+    ifstream file(filePath);
+    string input;
+    while (getline(file, input, '}')) {
+        if (input.length() > 3) {
+            if (input.find("{{") != string::npos) {
+                input = input.substr(2);
+            } else {
+                input = input.substr(3);
+            }
+            rawPoints.push_back(input);
+        }
+    }
+    return rawPoints;
 }
 
-double ClosestPointPair::splitAndSolve(vector<Point> points) {
-    if (points.size() < 10) {
+void ClosestPointPair::populatePoints(Point* points, int pointsCount, vector<string> rawPoints) {
+    for (int i = 0; i < pointsCount; ++i) {
+        Point point{};
+        string part;
+        stringstream ss(rawPoints[i]);
+        getline(ss, part, ',');
+        point.x = stod(part);
+        getline(ss, part, ',');
+        point.y = stod(part.substr(1));
+        points[i] = point;
+    }
+}
+
+double ClosestPointPair::splitAndSolve(Point* points, int pointsCount) {
+    if (pointsCount < 10) {
         double bruteForceMin = sqrt(
             pow(points[0].x - points[1].x, 2) + pow(points[0].y - points[1].y, 2)
         );
-        for (int i = 0; i < points.size(); i++) {
-            for (int j = i + 1; j < points.size(); j++) {
+        for (int i = 0; i < pointsCount; i++) {
+            for (int j = i + 1; j < pointsCount; j++) {
                 double distance = sqrt(
                     pow(points[i].x - points[j].x, 2) +
                     pow(points[i].y - points[j].y, 2)
@@ -65,10 +68,10 @@ double ClosestPointPair::splitAndSolve(vector<Point> points) {
         }
         return bruteForceMin;
     }
-    int middleIndex = int(points.size() / 2);
-    vector<Point> leftPoints(points.begin(), points.begin() + middleIndex);
-    vector<Point> rightPoints(points.begin() + middleIndex, points.end());
-    double newMin = min(splitAndSolve(leftPoints), splitAndSolve(rightPoints));
+    int middleIndex = pointsCount / 2;
+    Point* leftPoints = points;
+    Point* rightPoints = points + middleIndex;  // Might need a +1 here
+    double newMin = min(splitAndSolve(leftPoints, middleIndex), splitAndSolve(rightPoints, middleIndex));
     int leftIndex = middleIndex;
     double leftMin = points[middleIndex].x - newMin;
     while (points[leftIndex].x >= leftMin && leftIndex > 0) {
@@ -76,14 +79,15 @@ double ClosestPointPair::splitAndSolve(vector<Point> points) {
     }
     int rightIndex = middleIndex;
     double rightMax = points[middleIndex].x + newMin;
-    while (points[rightIndex].x <= rightMax && rightIndex < points.size()) {
+    while (points[rightIndex].x <= rightMax && rightIndex < pointsCount) {
         rightIndex++;
     }
-    vector<Point> middlePoints(points.begin() + leftIndex, points.begin() + rightIndex);
-    sort(middlePoints.begin(), middlePoints.end(), sortY);
-    for (int i = 0; i < middlePoints.size(); i++) {
+    Point* middlePoints = points + leftIndex;
+    int middleSize = rightIndex - leftIndex;
+    sort(middlePoints, middlePoints + middleSize);
+    for (int i = 0; i < middleSize; i++) {
         for (int j = 1; j <= 2; j++) {
-            if (i + j < middlePoints.size()) {
+            if (i + j < middleSize) {
                 double distance = sqrt(
                     pow(middlePoints[i].x - middlePoints[i + j].x, 2) +
                     pow(middlePoints[i].y - middlePoints[i + j].y, 2)
@@ -98,19 +102,24 @@ double ClosestPointPair::splitAndSolve(vector<Point> points) {
 }
 
 double ClosestPointPair::divideAndConquer(const string &filePath) {
-    vector<Point> points = parseInput(filePath);
-    sort(points.begin(), points.end(), sortX);
-    return splitAndSolve(points);
+    vector<string> rawPoints = parseInput(filePath);
+    int pointsCount = int(rawPoints.size());
+    auto* points = new Point[pointsCount];
+    populatePoints(points, pointsCount, rawPoints);
+    sort(points, points + pointsCount, sortX);
+    return round(splitAndSolve(points, pointsCount) * 1000) / 1000;
 }
 
 double ClosestPointPair::bruteForce(const string &filePath) {
-    vector<Point> points = parseInput(filePath);
-    sort(points.begin(), points.end(), sortX);
+    vector<string> rawPoints = parseInput(filePath);
+    int pointsCount = int(rawPoints.size());
+    Point points[pointsCount];
+    populatePoints(points, pointsCount, rawPoints);
     double bruteForceMin = sqrt(
         pow(points[0].x - points[1].x, 2) + pow(points[0].y - points[1].y, 2)
     );
-    for (int i = 0; i < points.size(); i++) {
-        for (int j = i + 1; j < points.size(); j++) {
+    for (int i = 0; i < pointsCount; i++) {
+        for (int j = i + 1; j < pointsCount; j++) {
             double distance = sqrt(
                 pow(points[i].x - points[j].x, 2) +
                 pow(points[i].y - points[j].y, 2)
@@ -120,5 +129,5 @@ double ClosestPointPair::bruteForce(const string &filePath) {
             }
         }
     }
-    return bruteForceMin;
+    return round(bruteForceMin * 1000) / 1000;
 }

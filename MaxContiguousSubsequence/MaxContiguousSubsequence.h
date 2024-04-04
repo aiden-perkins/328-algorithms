@@ -6,8 +6,8 @@ using namespace std;
 class MaxContiguousSubsequence {
     private:
         static vector<int> parseInput(const string&);
-        static int splitAndSolve(vector<int>);
-        static int solveMiddle(vector<int>, int);
+        static int splitAndSolve(int*, int);
+        static int solveMiddle(int*, int, int);
     public:
         static int kadane(const string&);
         static int divideAndConquer(const string&);

@@ -61,16 +61,13 @@ will run the kadane method on the MaxContiguousSubsequence problem on all test c
 
 ### Todo
 
-* Switch from vectors to arrays in the following c++ algorithms:
-  * ClosestPointPair
-  * MaxContiguousSubsequence
 * Split up the python implementations of StrassenAlgorithm, so it's not deceptive.
 
 | Algorithm                   | Problem                                   | Lecture Name                       | Cleared | Release Timed | 
 |:----------------------------|:------------------------------------------|:-----------------------------------|:--------|:--------------|
-| ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          |         |               | 
+| ClosestPointPair            | Closest Point Pair                        | Introduction to Recursion          | ✓       |               | 
 | StrassenAlgorithm           | Matrix Multiplication                     | D&C: Strassen's Algorithm          | ✓       | ✓             | 
-| MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      |         |               | 
+| MaxContiguousSubsequence    | Max Continuous Subsequence Sum            | D&C: Fast Fourier Transform I      | ✓       |               | 
 | DeterministicOrderSelection | Kth smallest element in an unordered list | D&C: Deterministic order selection | ✓       | ✓             | 
 | KnapsackProblem             | 0/1 Knapsack Problem                      | DP I: 0-1 Knapsack Problem         | ✓       | ✓             | 
 | MatrixChainMultiplication   | Min multiplications in a matrix chain     | DP II: Matrix Chain Multiplication | ✓       | ✓             | 
